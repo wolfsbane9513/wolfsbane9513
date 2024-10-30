@@ -6,7 +6,7 @@ Aspiring Data Scientist
 
 Robotics and AI was always a passion to begin with and I always keep myself apprised of emerging technologies is when I stumbled across the Hadoop ecosystem after researching I came across Data Science and Analytics which I felt would help rekindle my passion. Hands-on experience with machine learning algorithms in R and Python. Fascinated by machine Learning AI. understand codes in C,C++,HTML,JAVA,PHP,Python,SQL but unfortunately jack of all master of none. Trying to setup some start up with my friends. Routine job during the day
 
-* 🌍  I'm based in Pune,Maharashtra,India
+* 🌍  Born and brought up in Pune,Maharashtra India, Currently in Silicon Valley fo India Bengaluru,Karnataka india
 * ✉️  You can contact me at [wolfsbane9513@gmail.com](mailto:wolfsbane9513@gmail.com)
 * 🧠  I'm learning Haystack Framework
 * 🤝  I'm open to collaborating on Machine Learning, Data Science, IOT based projects
