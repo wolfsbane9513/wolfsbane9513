@@ -476,10 +476,97 @@ section{padding:100px 0;position:relative}
   .hero-name{font-size:2.4rem}
   .timeline{padding-left:28px}
 }
+/* ===== ROAMING AGENTS ===== */
+.agent{
+  position:fixed;z-index:50;cursor:pointer;
+  transition:transform 0.1s;
+  will-change:left;
+}
+.agent:hover{z-index:60}
+.agent:hover .agent-body{animation-play-state:paused!important}
+.agent:hover .agent-speech{opacity:1;transform:translateY(0);pointer-events:auto}
+
+/* Agent Pixel Body */
+.agent-body{
+  width:24px;height:36px;position:relative;
+  animation:agentBob 0.6s ease-in-out infinite;
+}
+.agent:hover .agent-body{animation:none}
+@keyframes agentBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+.agent-head{
+  width:14px;height:14px;position:absolute;top:0;left:50%;
+  transform:translateX(-50%);border:2px solid var(--bg);
+}
+.agent-torso{
+  width:18px;height:10px;position:absolute;top:13px;left:50%;
+  transform:translateX(-50%);
+}
+.agent-leg{
+  width:6px;height:10px;position:absolute;bottom:0;
+}
+.agent-leg.l{left:3px;animation:agentWalkL 0.4s ease infinite}
+.agent-leg.r{right:3px;animation:agentWalkR 0.4s ease infinite}
+.agent:hover .agent-leg{animation:none!important}
+@keyframes agentWalkL{0%,100%{transform:rotate(0)}50%{transform:rotate(-15deg)}}
+@keyframes agentWalkR{0%,100%{transform:rotate(0)}50%{transform:rotate(15deg)}}
+
+.agent-eye{
+  width:3px;height:3px;background:var(--bg);
+  position:absolute;top:4px;border-radius:50%;
+}
+.agent-eye.l{left:2px}.agent-eye.r{right:2px}
+
+/* Direction */
+.agent.facing-left .agent-body{transform:scaleX(-1)}
+.agent:hover .agent-body{transform:scaleX(1)!important}
+
+/* Role indicator */
+.agent-role{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:6px;text-transform:uppercase;
+  letter-spacing:1px;white-space:nowrap;
+  opacity:0;transition:opacity 0.15s;
+  padding:1px 4px;border:1px solid;
+}
+.agent:hover .agent-role{opacity:1}
+
+/* Speech Bubble */
+.agent-speech{
+  position:absolute;bottom:calc(100% + 12px);left:50%;
+  transform:translateX(-50%) translateY(6px);
+  width:max-content;max-width:220px;
+  background:var(--bg);border:2px solid;
+  padding:10px 12px;
+  font-family:var(--font-mono);font-size:0.65rem;
+  line-height:1.5;color:var(--text);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.2s,transform 0.2s;
+  box-shadow:3px 3px 0px 0px;
+}
+.agent-speech::after{
+  content:'';position:absolute;bottom:-7px;left:50%;
+  transform:translateX(-50%);
+  width:0;height:0;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-top:7px solid;
+  border-top-color:inherit;
+}
+.agent-speech .speech-name{
+  font-weight:700;font-size:0.6rem;text-transform:uppercase;
+  letter-spacing:2px;margin-bottom:4px;display:block;
+}
+
+@media(max-width:768px){
+  .agent{display:none}
+}
+
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
   .marquee-track{animation:none}
   .reveal{opacity:1;transform:none}
+  .agent{display:none}
 }
 
 /* ===== AI MISSION CONTROL ===== */
@@ -1632,6 +1719,130 @@ RULES:
 
   // Init UI
   updateXpUI();
+})();
+
+// ===== ROAMING AGENTS =====
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth < 769) return;
+
+  const AGENTS = [
+    {
+      name: 'RAG Bot',
+      color: '#FF5F1F',
+      speech: 'I build production RAG pipelines that process 1M+ logs daily. Hybrid search + reranking + contextual memory.',
+      speed: 0.4
+    },
+    {
+      name: 'Fraud Scout',
+      color: '#EF4444',
+      speech: 'LSTM anomaly detection on Swift Network transactions. 30% improvement in fraud detection at Morgan Stanley.',
+      speed: 0.3
+    },
+    {
+      name: 'Auto Pilot',
+      color: '#8B5CF6',
+      speech: 'n8n and make.com wizard. I teach 100+ professionals how to build AI-powered automation workflows.',
+      speed: 0.55
+    },
+    {
+      name: 'Agent Smith',
+      color: '#2563EB',
+      speech: 'Multi-agent orchestration with CrewAI, LangChain, and MCP. Autonomous pipelines that reason and act.',
+      speed: 0.35
+    },
+    {
+      name: 'K8s Ops',
+      color: '#22C55E',
+      speech: '30% efficiency gain via SARIMA forecasting + anomaly detection on Kubernetes at scale.',
+      speed: 0.45
+    }
+  ];
+
+  function createAgent(config, index) {
+    const el = document.createElement('div');
+    el.className = 'agent';
+
+    // Random starting Y position (between 20% and 85% of viewport)
+    const yPos = 20 + Math.random() * 65;
+    el.style.top = yPos + 'vh';
+
+    // Stagger start positions across the screen
+    const startX = (index * 22 + Math.random() * 10) % 100;
+    el.style.left = startX + 'vw';
+
+    el.innerHTML = `
+      <div class="agent-role" style="color:${config.color};border-color:${config.color}">${config.name}</div>
+      <div class="agent-speech" style="border-color:${config.color};box-shadow:3px 3px 0px 0px ${config.color}">
+        <span class="speech-name" style="color:${config.color}">${config.name}</span>
+        ${config.speech}
+      </div>
+      <div class="agent-body">
+        <div class="agent-head" style="background:${config.color}">
+          <div class="agent-eye l"></div>
+          <div class="agent-eye r"></div>
+        </div>
+        <div class="agent-torso" style="background:${config.color}"></div>
+        <div class="agent-leg l" style="background:${config.color}"></div>
+        <div class="agent-leg r" style="background:${config.color}"></div>
+      </div>`;
+
+    document.body.appendChild(el);
+
+    // Movement state
+    let x = startX;
+    let direction = Math.random() > 0.5 ? 1 : -1;
+    let paused = false;
+    let pauseTimer = 0;
+    let wanderTarget = x + direction * (20 + Math.random() * 30);
+
+    if (direction < 0) el.classList.add('facing-left');
+
+    el.addEventListener('mouseenter', () => { paused = true; });
+    el.addEventListener('mouseleave', () => {
+      paused = false;
+      // Pick new direction after interaction
+      direction = Math.random() > 0.5 ? 1 : -1;
+      wanderTarget = x + direction * (15 + Math.random() * 25);
+      el.classList.toggle('facing-left', direction < 0);
+    });
+
+    function tick() {
+      if (paused) { requestAnimationFrame(tick); return; }
+
+      // Random pauses (idle moments)
+      if (pauseTimer > 0) {
+        pauseTimer--;
+        requestAnimationFrame(tick);
+        return;
+      }
+
+      x += config.speed * direction * 0.06;
+
+      // Reached wander target — pick new one
+      if ((direction > 0 && x >= wanderTarget) || (direction < 0 && x <= wanderTarget)) {
+        // Random pause before turning
+        pauseTimer = Math.floor(60 + Math.random() * 180);
+        direction = -direction;
+        wanderTarget = x + direction * (15 + Math.random() * 30);
+        el.classList.toggle('facing-left', direction < 0);
+      }
+
+      // Keep within bounds
+      if (x < -2) { x = -2; direction = 1; wanderTarget = 10 + Math.random() * 30; el.classList.remove('facing-left'); }
+      if (x > 98) { x = 98; direction = -1; wanderTarget = 70 - Math.random() * 30; el.classList.add('facing-left'); }
+
+      el.style.left = x + 'vw';
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  // Spawn agents with slight delay for stagger
+  AGENTS.forEach((agent, i) => {
+    setTimeout(() => createAgent(agent, i), i * 600 + 2000);
+  });
 })();
 </script>
 </body>
