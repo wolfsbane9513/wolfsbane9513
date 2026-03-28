@@ -1,0 +1,87 @@
+name: Deploy Portfolio to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check index.html exists
+        run: |
+          if [ ! -f index.html ]; then
+            echo "::error::index.html not found"
+            exit 1
+          fi
+          echo "index.html found"
+
+      - name: Validate HTML structure
+        run: |
+          # Check for required meta tags
+          grep -q '<meta charset' index.html || { echo "::error::Missing charset meta"; exit 1; }
+          grep -q '<meta name="viewport"' index.html || { echo "::error::Missing viewport meta"; exit 1; }
+          grep -q '<title>' index.html || { echo "::error::Missing title tag"; exit 1; }
+          echo "HTML structure validated"
+
+      - name: Check accessibility basics
+        run: |
+          # Verify all images have alt text
+          if grep -P '<img(?![^>]*alt=)' index.html; then
+            echo "::warning::Found images without alt text"
+          fi
+          # Verify lang attribute
+          grep -q '<html lang=' index.html || { echo "::warning::Missing lang attribute on html"; }
+          echo "Accessibility checks passed"
+
+      - name: Check for broken internal links
+        run: |
+          # Extract internal anchor hrefs and verify targets exist
+          ANCHORS=$(grep -oP 'href="#\K[^"]+' index.html || true)
+          FAIL=0
+          for anchor in $ANCHORS; do
+            if ! grep -qP "id=['\"]${anchor}['\"]" index.html; then
+              echo "::warning::Anchor #${anchor} has no matching id"
+              FAIL=1
+            fi
+          done
+          if [ "$FAIL" -eq 0 ]; then
+            echo "All internal links verified"
+          fi
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
