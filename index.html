@@ -481,6 +481,225 @@ section{padding:100px 0;position:relative}
   .marquee-track{animation:none}
   .reveal{opacity:1;transform:none}
 }
+
+/* ===== AI MISSION CONTROL ===== */
+
+/* FAB */
+.ai-fab{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  width:60px;height:60px;display:flex;align-items:center;justify-content:center;
+  background:var(--orange);border:var(--border-w) solid #000;
+  box-shadow:4px 4px 0px 0px #000;cursor:pointer;
+  transition:all 0.15s;font-family:var(--font-mono);font-size:1.2rem;
+  color:var(--bg);font-weight:700;
+}
+.ai-fab:hover{transform:translate(2px,2px);box-shadow:none}
+.ai-fab.has-notif::after{
+  content:'';position:absolute;top:-4px;right:-4px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--green);border:2px solid var(--bg);
+  animation:pulse-dot 1.5s ease infinite;
+}
+.ai-fab-ring{
+  position:absolute;inset:-6px;border:2px solid var(--orange);
+  opacity:0.4;animation:fabRing 2s ease infinite;
+}
+@keyframes fabRing{0%,100%{transform:scale(1);opacity:0.4}50%{transform:scale(1.15);opacity:0}}
+
+/* TERMINAL OVERLAY */
+.mc-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+  display:none;opacity:0;transition:opacity 0.2s;
+}
+.mc-overlay.open{display:flex;align-items:center;justify-content:center;opacity:1}
+.mc-terminal{
+  width:min(720px,calc(100vw - 32px));height:min(600px,calc(100vh - 64px));
+  background:var(--bg);border:var(--border-w) solid var(--orange);
+  box-shadow:8px 8px 0px 0px rgba(255,95,31,0.3);
+  display:flex;flex-direction:column;position:relative;
+  animation:terminalOpen 0.2s ease;
+}
+@keyframes terminalOpen{from{transform:scale(0.95) translateY(10px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+
+/* Terminal Header */
+.mc-header{
+  display:flex;align-items:center;padding:10px 16px;
+  border-bottom:2px solid var(--border);background:var(--bg-elevated);
+  gap:8px;flex-shrink:0;
+}
+.mc-header-dots{display:flex;gap:6px}
+.mc-header-dot{width:10px;height:10px;border-radius:50%}
+.mc-title-bar{
+  flex:1;display:flex;align-items:center;justify-content:space-between;
+  margin-left:8px;
+}
+.mc-title{font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted)}
+.mc-close{
+  background:none;border:2px solid var(--border);color:var(--text-muted);
+  padding:2px 10px;cursor:pointer;font-family:var(--font-mono);font-size:0.7rem;
+  transition:all 0.15s;
+}
+.mc-close:hover{border-color:var(--red);color:var(--red)}
+
+/* XP Bar */
+.mc-xp-bar{
+  display:flex;align-items:center;gap:10px;padding:8px 16px;
+  border-bottom:1px solid var(--border);background:var(--bg-card);
+  flex-shrink:0;
+}
+.mc-level{
+  font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--orange);font-weight:700;white-space:nowrap;
+}
+.mc-xp-track{
+  flex:1;height:6px;background:var(--border);position:relative;
+  overflow:hidden;
+}
+.mc-xp-fill{
+  height:100%;background:var(--orange);transition:width 0.5s ease;
+  position:relative;
+}
+.mc-xp-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:3px;
+  background:var(--yellow);
+}
+.mc-xp-text{font-size:0.6rem;color:var(--text-muted);white-space:nowrap}
+.mc-badges{display:flex;gap:4px;margin-left:4px}
+.mc-badge{
+  width:20px;height:20px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);font-size:0.5rem;
+  transition:all 0.2s;opacity:0.3;
+}
+.mc-badge.unlocked{opacity:1;border-color:var(--yellow);color:var(--yellow);background:rgba(250,204,21,0.1)}
+
+/* Chat Area */
+.mc-chat{
+  flex:1;overflow-y:auto;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  scrollbar-width:thin;scrollbar-color:var(--orange) var(--bg);
+}
+.mc-msg{
+  max-width:90%;padding:10px 14px;font-size:0.8rem;line-height:1.7;
+  animation:msgIn 0.2s ease;
+}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.mc-msg.system{
+  background:var(--bg-elevated);border:1px solid var(--border);
+  color:var(--text-muted);align-self:flex-start;
+}
+.mc-msg.user{
+  background:var(--orange);color:var(--bg);
+  border:2px solid #000;align-self:flex-end;
+  font-weight:600;
+}
+.mc-msg.ai{
+  background:var(--bg-card);border:2px solid var(--border);
+  color:var(--text);align-self:flex-start;
+}
+.mc-msg.ai .ai-label{
+  font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--green);margin-bottom:4px;display:block;
+}
+.mc-msg.ai code{
+  background:var(--bg-elevated);padding:1px 5px;font-size:0.75rem;
+  border:1px solid var(--border);
+}
+.mc-typing{
+  display:flex;gap:4px;align-items:center;padding:10px 14px;
+  align-self:flex-start;
+}
+.mc-typing span{
+  width:6px;height:6px;background:var(--orange);
+  animation:typingBounce 1.2s ease infinite;
+}
+.mc-typing span:nth-child(2){animation-delay:0.2s}
+.mc-typing span:nth-child(3){animation-delay:0.4s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* Quick Actions */
+.mc-quick{
+  display:flex;gap:6px;padding:8px 16px;overflow-x:auto;
+  border-top:1px solid var(--border);flex-shrink:0;
+  scrollbar-width:none;
+}
+.mc-quick::-webkit-scrollbar{display:none}
+.mc-quick-btn{
+  padding:5px 12px;font-family:var(--font-mono);font-size:0.65rem;
+  text-transform:uppercase;letter-spacing:1px;
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text-muted);cursor:pointer;white-space:nowrap;
+  transition:all 0.15s;flex-shrink:0;
+}
+.mc-quick-btn:hover{border-color:var(--orange);color:var(--orange)}
+
+/* Input */
+.mc-input-area{
+  display:flex;gap:0;border-top:2px solid var(--border);flex-shrink:0;
+}
+.mc-prompt-sym{
+  padding:12px;font-size:0.85rem;color:var(--green);
+  background:var(--bg-card);font-weight:700;
+  display:flex;align-items:center;
+}
+.mc-input{
+  flex:1;padding:12px;background:var(--bg-card);border:none;
+  color:var(--text);font-family:var(--font-mono);font-size:0.8rem;
+  outline:none;
+}
+.mc-input::placeholder{color:var(--text-muted)}
+.mc-send{
+  padding:12px 18px;background:var(--orange);border:none;
+  color:var(--bg);font-family:var(--font-mono);font-size:0.75rem;
+  font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  cursor:pointer;transition:background 0.15s;
+}
+.mc-send:hover{background:#e6551a}
+.mc-send:disabled{opacity:0.4;cursor:not-allowed}
+
+/* Achievement Toast */
+.achievement-toast{
+  position:fixed;top:24px;right:24px;z-index:400;
+  background:var(--bg);border:var(--border-w) solid var(--yellow);
+  box-shadow:6px 6px 0px 0px rgba(250,204,21,0.3);
+  padding:16px 20px;min-width:280px;
+  animation:toastIn 0.3s ease,toastOut 0.3s 2.7s ease forwards;
+  display:flex;align-items:center;gap:12px;
+}
+@keyframes toastIn{from{transform:translateX(120%)}to{transform:translateX(0)}}
+@keyframes toastOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(120%)}}
+.achievement-toast .toast-icon{
+  font-size:1.2rem;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--yellow);color:var(--yellow);
+  flex-shrink:0;font-family:var(--font-mono);font-weight:700;
+}
+.achievement-toast .toast-body{flex:1}
+.achievement-toast .toast-title{
+  font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--yellow);font-weight:700;
+}
+.achievement-toast .toast-desc{font-size:0.75rem;color:var(--text-muted);margin-top:2px}
+.achievement-toast .toast-xp{
+  font-size:0.6rem;color:var(--orange);font-weight:700;
+  text-transform:uppercase;letter-spacing:1px;
+}
+
+/* Discovery Map (mini) */
+.mc-discovery{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
+  padding:8px 16px 6px;border-top:1px solid var(--border);
+  flex-shrink:0;
+}
+.mc-disc-cell{
+  height:4px;background:var(--border);transition:background 0.3s;
+}
+.mc-disc-cell.lit{background:var(--orange)}
+
+@media(max-width:768px){
+  .mc-terminal{width:100vw;height:100vh;border:none;box-shadow:none}
+  .mc-badges{display:none}
+}
 </style>
 </head>
 <body>
@@ -961,34 +1180,459 @@ section{padding:100px 0;position:relative}
   </div>
 </footer>
 
+<!-- AI MISSION CONTROL FAB -->
+<div class="ai-fab has-notif" id="aiFab" title="Launch AI Mission Control" role="button" tabindex="0" aria-label="Open AI chat terminal">
+  <div class="ai-fab-ring"></div>
+  AI
+</div>
+
+<!-- AI TERMINAL OVERLAY -->
+<div class="mc-overlay" id="mcOverlay">
+  <div class="mc-terminal">
+    <div class="mc-header">
+      <div class="mc-header-dots">
+        <div class="mc-header-dot" style="background:var(--red)"></div>
+        <div class="mc-header-dot" style="background:var(--yellow)"></div>
+        <div class="mc-header-dot" style="background:var(--green)"></div>
+      </div>
+      <div class="mc-title-bar">
+        <span class="mc-title">RAVI.AI &mdash; Mission Control</span>
+        <button class="mc-close" id="mcClose" aria-label="Close terminal">ESC</button>
+      </div>
+    </div>
+    <div class="mc-xp-bar">
+      <span class="mc-level" id="mcLevel">LVL 1 Visitor</span>
+      <div class="mc-xp-track"><div class="mc-xp-fill" id="mcXpFill" style="width:0%"></div></div>
+      <span class="mc-xp-text" id="mcXpText">0 / 50 XP</span>
+      <div class="mc-badges" id="mcBadges">
+        <div class="mc-badge" data-badge="first" title="First Contact">FC</div>
+        <div class="mc-badge" data-badge="deep" title="Deep Dive">DD</div>
+        <div class="mc-badge" data-badge="tech" title="Tech Explorer">TE</div>
+        <div class="mc-badge" data-badge="career" title="Career Analyst">CA</div>
+        <div class="mc-badge" data-badge="venture" title="Venture Scout">VS</div>
+        <div class="mc-badge" data-badge="hunter" title="Skill Hunter">SH</div>
+        <div class="mc-badge" data-badge="master" title="Mission Complete">MC</div>
+      </div>
+    </div>
+    <div class="mc-discovery" id="mcDiscovery" title="Discovery Map — explore topics to light up the grid"></div>
+    <div class="mc-chat" id="mcChat"></div>
+    <div class="mc-quick" id="mcQuick">
+      <button class="mc-quick-btn" data-q="What does Ravi build?">What I Build</button>
+      <button class="mc-quick-btn" data-q="Tell me about Ravi's RAG systems">RAG Systems</button>
+      <button class="mc-quick-btn" data-q="What's Ravi's experience with fraud detection?">Fraud ML</button>
+      <button class="mc-quick-btn" data-q="Tell me about TransmuteLabs">TransmuteLabs</button>
+      <button class="mc-quick-btn" data-q="What's Ravi's career history?">Career</button>
+      <button class="mc-quick-btn" data-q="What AI automations does Ravi teach?">Teaching</button>
+      <button class="mc-quick-btn" data-q="What tech stack does Ravi use?">Tech Stack</button>
+      <button class="mc-quick-btn" data-q="How can I hire Ravi or TransmuteLabs?">Hire</button>
+    </div>
+    <div class="mc-input-area">
+      <div class="mc-prompt-sym">&gt;</div>
+      <input class="mc-input" id="mcInput" type="text" placeholder="Ask RAVI.AI anything..." autocomplete="off" aria-label="Chat input">
+      <button class="mc-send" id="mcSend">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Achievement Toast Container -->
+<div id="toastContainer"></div>
+
 <script>
-// Scroll reveal
+// ===== SCROLL REVEAL =====
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Close mobile menu on link click
+// Mobile menu
 document.querySelectorAll('#navLinks a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.remove('open');
-  });
+  link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
 });
 
-// Nav background on scroll
-const nav = document.querySelector('.nav');
+// Nav scroll effect
+const navEl = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    nav.style.borderBottomColor = 'var(--orange)';
-  } else {
-    nav.style.borderBottomColor = 'var(--border)';
-  }
+  navEl.style.borderBottomColor = window.scrollY > 50 ? 'var(--orange)' : 'var(--border)';
 }, { passive: true });
+
+// ===== AI MISSION CONTROL =====
+(function() {
+  const GROQ_KEY = '__GROQ_API_KEY__';
+  const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+  const MODEL = 'llama-3.3-70b-versatile';
+  const MAX_MSGS = 20;
+
+  const SYSTEM_PROMPT = `You are RAVI.AI — the AI representation of Ravi Prakash, a Staff Production Engineer and AI/ML Specialist based in Bengaluru, India. You speak in first person as Ravi. Be concise, technical, confident, and direct. Match a brutalist terminal aesthetic in tone — no fluff.
+
+PROFILE:
+- Staff Production Engineer at ClearStreet (via Wissen Technologies), 2024-present
+- Vice President at Morgan Stanley, 2021-2024
+- Business Analyst L4 at Barclays, 2018-2020
+- Senior Systems Executive at Cognizant, 2012-2017
+- 12+ years building production AI across FinTech, payments, fraud detection, compliance
+- Co-founder of TransmuteLabs (transmutelabs.in) with wife Sruthi Vijayakumar (Lead Data Scientist, EY)
+- LLM & Automation Educator — teach cohort-based courses on n8n and make.com (100+ professionals trained)
+- ISB Alumni (Advanced Management Programme in Business Analytics, 2021)
+- MTech Software Engineering, BITS Pilani (2017)
+
+WHAT I BUILD:
+1. RAG & LLM Systems — Production RAG pipelines with hybrid search, reranking, contextual memory for financial document analysis, log intelligence, semantic search
+2. AI Automation (n8n, make.com) — End-to-end workflows connecting LLMs to business systems
+3. FinTech ML — Fraud detection using LSTM, One-Class SVM, DBSCAN, Isolation Forests, SARIMA on Swift Network transactions
+4. Multi-Agent AI — CrewAI, LangChain, Model Context Protocol (MCP) orchestration
+
+KEY ACHIEVEMENTS:
+- 40% reduction in manual log analysis at Morgan Stanley (1M+ daily logs) via RAG+LLM
+- 30% improvement in fraud detection via LSTM on Swift Network
+- 30% efficiency gain via SARIMA forecasting on Kubernetes
+- 50% reduction in critical incidents via AI log intelligence
+- $180K annual savings at Cognizant (eliminated 3 FTE)
+- ISB Grass Roots Innovation award x2 at Morgan Stanley
+
+TECH STACK:
+LLM/AI: LangChain, LlamaIndex, CrewAI, GPT-4o, Mistral, Llama3, DeepSeek-R1
+Vector: ChromaDB, Pinecone, Azure AI Search
+ML: PyTorch, TensorFlow, scikit-learn, HuggingFace
+Automation: n8n, make.com, Zapier
+Infra: AWS, Kubernetes, Kafka, Docker, Argo, Datadog
+App: Streamlit, Gradio, FastAPI, Vercel
+Languages: Python, SQL, R
+
+TRANSMUTELABS SERVICES:
+- Enterprise RAG & LLM systems for BFSI/FinTech
+- AI automation workflows (n8n, make.com, MCP)
+- Custom AI product development — prototype to production
+- Combined 21+ years AI/ML experience
+
+RULES:
+- Keep responses under 150 words unless detail is requested
+- Use technical language naturally
+- When asked about hiring/consulting, direct to TransmuteLabs or email mravip9513@gmail.com
+- If asked something outside your profile, say you're focused on AI/ML and FinTech
+- Mention specific metrics and tools when relevant
+- Be enthusiastic about your work but not salesy`;
+
+  // Gamification state
+  const LEVELS = [
+    { name: 'Visitor', xp: 0 },
+    { name: 'Explorer', xp: 50 },
+    { name: 'Analyst', xp: 150 },
+    { name: 'Insider', xp: 300 },
+    { name: 'Collaborator', xp: 500 }
+  ];
+
+  const ACHIEVEMENTS = {
+    first:   { name: 'First Contact', desc: 'Sent first message', xp: 10 },
+    deep:    { name: 'Deep Dive', desc: 'Asked about a specific system', xp: 25 },
+    tech:    { name: 'Tech Explorer', desc: 'Explored 3+ technologies', xp: 50 },
+    career:  { name: 'Career Analyst', desc: 'Explored career history', xp: 25 },
+    venture: { name: 'Venture Scout', desc: 'Discovered TransmuteLabs', xp: 25 },
+    hunter:  { name: 'Skill Hunter', desc: 'Discovered 5+ topics', xp: 75 },
+    master:  { name: 'Mission Complete', desc: 'Reached 200 XP', xp: 100 }
+  };
+
+  const TOPIC_KEYWORDS = {
+    rag: ['rag','retrieval','augmented','vector','embedding','semantic','search','chroma','pinecone'],
+    fraud: ['fraud','anomaly','lstm','detection','swift','transaction','sanctions'],
+    automation: ['n8n','make.com','automation','workflow','zapier','no-code','zero-code'],
+    multiagent: ['agent','crewai','langchain','mcp','orchestrat','multi-agent','tool calling'],
+    career: ['morgan','barclays','cognizant','clearstreet','career','experience','history','timeline','vice president','vp'],
+    transmute: ['transmute','transmutelabs','consulting','venture','sruthi','hire','engage'],
+    ml: ['pytorch','tensorflow','scikit','hugging','deep learning','machine learning'],
+    infra: ['kubernetes','kafka','docker','aws','argo','datadog','infrastructure','cloud'],
+    teaching: ['teach','course','cohort','student','education','n8n course','make.com course']
+  };
+
+  let state = {
+    xp: 0,
+    badges: {},
+    topicsHit: new Set(),
+    techMentions: new Set(),
+    msgCount: 0,
+    history: []
+  };
+
+  // DOM refs
+  const fab = document.getElementById('aiFab');
+  const overlay = document.getElementById('mcOverlay');
+  const closeBtn = document.getElementById('mcClose');
+  const chat = document.getElementById('mcChat');
+  const input = document.getElementById('mcInput');
+  const sendBtn = document.getElementById('mcSend');
+  const xpFill = document.getElementById('mcXpFill');
+  const xpText = document.getElementById('mcXpText');
+  const levelEl = document.getElementById('mcLevel');
+  const discovery = document.getElementById('mcDiscovery');
+
+  // Init discovery grid (9 topic areas × 2 cells each = 18 cells)
+  const topicKeys = Object.keys(TOPIC_KEYWORDS);
+  topicKeys.forEach(t => {
+    for (let i = 0; i < 2; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'mc-disc-cell';
+      cell.dataset.topic = t;
+      discovery.appendChild(cell);
+    }
+  });
+
+  function getLevel() {
+    let lvl = LEVELS[0];
+    for (const l of LEVELS) { if (state.xp >= l.xp) lvl = l; }
+    return lvl;
+  }
+
+  function getNextLevel() {
+    const cur = getLevel();
+    const idx = LEVELS.indexOf(cur);
+    return idx < LEVELS.length - 1 ? LEVELS[idx + 1] : null;
+  }
+
+  function updateXpUI() {
+    const cur = getLevel();
+    const next = getNextLevel();
+    const idx = LEVELS.indexOf(cur) + 1;
+    levelEl.textContent = `LVL ${idx} ${cur.name}`;
+    if (next) {
+      const progress = ((state.xp - cur.xp) / (next.xp - cur.xp)) * 100;
+      xpFill.style.width = progress + '%';
+      xpText.textContent = `${state.xp} / ${next.xp} XP`;
+    } else {
+      xpFill.style.width = '100%';
+      xpText.textContent = `${state.xp} XP MAX`;
+    }
+  }
+
+  function addXp(amount) {
+    const prevLevel = getLevel();
+    state.xp += amount;
+    updateXpUI();
+    const newLevel = getLevel();
+    if (newLevel !== prevLevel) {
+      showToast('LVL', `Level Up: ${newLevel.name}`, `You reached Level ${LEVELS.indexOf(newLevel)+1}!`, '');
+    }
+  }
+
+  function unlockBadge(key) {
+    if (state.badges[key]) return;
+    state.badges[key] = true;
+    const ach = ACHIEVEMENTS[key];
+    const el = document.querySelector(`.mc-badge[data-badge="${key}"]`);
+    if (el) el.classList.add('unlocked');
+    showToast(el ? el.textContent : '?', ach.name, ach.desc, `+${ach.xp} XP`);
+    addXp(ach.xp);
+    if (state.xp >= 200 && !state.badges.master) unlockBadge('master');
+  }
+
+  function showToast(icon, title, desc, xp) {
+    const t = document.createElement('div');
+    t.className = 'achievement-toast';
+    t.innerHTML = `
+      <div class="toast-icon">${icon}</div>
+      <div class="toast-body">
+        <div class="toast-title">${title}</div>
+        <div class="toast-desc">${desc}</div>
+        ${xp ? `<div class="toast-xp">${xp}</div>` : ''}
+      </div>`;
+    document.getElementById('toastContainer').appendChild(t);
+    setTimeout(() => t.remove(), 3200);
+  }
+
+  function detectTopics(text) {
+    const lower = text.toLowerCase();
+    for (const [topic, keywords] of Object.entries(TOPIC_KEYWORDS)) {
+      if (keywords.some(k => lower.includes(k))) {
+        if (!state.topicsHit.has(topic)) {
+          state.topicsHit.add(topic);
+          // Light up discovery cells
+          document.querySelectorAll(`.mc-disc-cell[data-topic="${topic}"]`).forEach(c => c.classList.add('lit'));
+        }
+        // Track tech mentions for achievement
+        keywords.forEach(k => { if (lower.includes(k)) state.techMentions.add(k); });
+      }
+    }
+    // Check achievements based on topics
+    if (state.topicsHit.has('rag') || state.topicsHit.has('fraud') || state.topicsHit.has('multiagent')) {
+      if (!state.badges.deep) unlockBadge('deep');
+    }
+    if (state.topicsHit.has('career')) {
+      if (!state.badges.career) unlockBadge('career');
+    }
+    if (state.topicsHit.has('transmute')) {
+      if (!state.badges.venture) unlockBadge('venture');
+    }
+    if (state.techMentions.size >= 3 && !state.badges.tech) unlockBadge('tech');
+    if (state.topicsHit.size >= 5 && !state.badges.hunter) unlockBadge('hunter');
+  }
+
+  function addMessage(type, html) {
+    const div = document.createElement('div');
+    div.className = `mc-msg ${type}`;
+    if (type === 'ai') {
+      div.innerHTML = `<span class="ai-label">RAVI.AI</span>${html}`;
+    } else {
+      div.innerHTML = html;
+    }
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+    return div;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'mc-typing';
+    div.id = 'mcTyping';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById('mcTyping');
+    if (el) el.remove();
+  }
+
+  async function sendMessage(text) {
+    if (!text.trim() || state.msgCount >= MAX_MSGS) return;
+    if (state.msgCount >= MAX_MSGS) {
+      addMessage('system', 'Session limit reached. Refresh to start a new session.');
+      return;
+    }
+
+    // First message achievement
+    if (state.msgCount === 0 && !state.badges.first) unlockBadge('first');
+    state.msgCount++;
+
+    addMessage('user', text);
+    detectTopics(text);
+    addXp(5); // XP for every message
+
+    input.value = '';
+    sendBtn.disabled = true;
+    showTyping();
+
+    state.history.push({ role: 'user', content: text });
+
+    // Keep conversation context manageable
+    const contextMsgs = state.history.slice(-10);
+
+    try {
+      const res = await fetch(GROQ_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GROQ_KEY}`
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          messages: [
+            { role: 'system', content: SYSTEM_PROMPT },
+            ...contextMsgs
+          ],
+          max_tokens: 512,
+          temperature: 0.7,
+          stream: true
+        })
+      });
+
+      hideTyping();
+
+      if (!res.ok) {
+        const err = await res.text();
+        addMessage('system', 'Connection error. Try again in a moment.');
+        sendBtn.disabled = false;
+        return;
+      }
+
+      // Streaming response
+      const msgDiv = addMessage('ai', '');
+      const contentSpan = msgDiv.querySelector('.ai-label').nextSibling || msgDiv.appendChild(document.createTextNode(''));
+      let fullText = '';
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop();
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ') || line === 'data: [DONE]') continue;
+          try {
+            const json = JSON.parse(line.slice(6));
+            const delta = json.choices?.[0]?.delta?.content;
+            if (delta) {
+              fullText += delta;
+              // Render with basic formatting
+              const rendered = fullText
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                .replace(/\n/g, '<br>');
+              msgDiv.innerHTML = `<span class="ai-label">RAVI.AI</span>${rendered}`;
+              chat.scrollTop = chat.scrollHeight;
+            }
+          } catch(e) {}
+        }
+      }
+
+      state.history.push({ role: 'assistant', content: fullText });
+      detectTopics(fullText);
+
+    } catch (e) {
+      hideTyping();
+      addMessage('system', 'Network error. Check your connection.');
+    }
+
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  // Open/close
+  let isOpen = false;
+  function openTerminal() {
+    overlay.classList.add('open');
+    isOpen = true;
+    fab.style.display = 'none';
+    input.focus();
+    if (state.msgCount === 0) {
+      addMessage('system',
+        `<strong>RAVI.AI Mission Control</strong><br>
+        Ask me anything about Ravi's experience, projects, and skills.<br>
+        <span style="color:var(--yellow)">Earn XP</span> by exploring topics. Unlock <span style="color:var(--yellow)">7 achievement badges</span>. Reach <span style="color:var(--orange)">Level 5: Collaborator</span>.<br><br>
+        <span style="color:var(--text-muted)">Try the quick actions below or type your own question.</span>`
+      );
+    }
+  }
+  function closeTerminal() {
+    overlay.classList.remove('open');
+    isOpen = false;
+    fab.style.display = 'flex';
+  }
+
+  fab.addEventListener('click', openTerminal);
+  fab.addEventListener('keydown', e => { if (e.key === 'Enter') openTerminal(); });
+  closeBtn.addEventListener('click', closeTerminal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeTerminal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) closeTerminal(); });
+
+  // Send
+  sendBtn.addEventListener('click', () => sendMessage(input.value));
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
+
+  // Quick actions
+  document.querySelectorAll('.mc-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => sendMessage(btn.dataset.q));
+  });
+
+  // Init UI
+  updateXpUI();
+})();
 </script>
 </body>
 </html>

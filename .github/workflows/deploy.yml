@@ -74,6 +74,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Inject API keys
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          if [ -n "$GROQ_API_KEY" ]; then
+            sed -i "s|__GROQ_API_KEY__|${GROQ_API_KEY}|g" index.html
+            echo "API key injected"
+          else
+            echo "::warning::GROQ_API_KEY secret not set — AI chat will not work"
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
