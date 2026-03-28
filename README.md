@@ -127,6 +127,14 @@ Co-founded **TransmuteLabs** with [Sruthi Vijayakumar](https://www.linkedin.com/
 
 ---
 
+### [ PORTFOLIO_SITE ]
+
+`// FULL INTERACTIVE EXPERIENCE`
+
+**[>>> Launch Portfolio Site](https://wolfsbane9513.github.io/wolfsbane9513/)** — Brutalist dark-themed portfolio with animated sections, scrolling marquee, and interactive tech stack.
+
+---
+
 ### [ SYSTEM_DIAGNOSTICS ]
 
 <p align="center">
