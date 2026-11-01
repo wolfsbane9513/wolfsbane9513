@@ -72,7 +72,7 @@ a:hover{color:var(--yellow)}
 }
 .nav-brand span{color:var(--orange)}
 .nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{
+.nav-links a{white-space:nowrap;
   font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;
   color:var(--text-muted);font-weight:500;
   transition:color 0.15s,transform 0.15s;
@@ -476,6 +476,54 @@ section{padding:100px 0;position:relative}
   .hero-name{font-size:2.4rem}
   .timeline{padding-left:28px}
 }
+/* ===== SYSTEM WALKTHROUGHS ===== */
+.wt-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:24px;scrollbar-width:none}
+.wt-tabs::-webkit-scrollbar{display:none}
+.wt-tab{flex:none;font:500 0.72rem var(--font-mono);text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);background:var(--bg-card);border:2px solid var(--border);padding:8px 14px;cursor:pointer;transition:all .15s}
+.wt-tab:hover{border-color:var(--orange);color:var(--orange)}
+.wt-tab[aria-selected="true"]{background:var(--orange);color:var(--bg);border-color:#000;box-shadow:var(--shadow-sm)}
+.wt-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:6px}
+.wt-head h3{font-family:var(--font-display);font-size:1.5rem;font-weight:700;letter-spacing:-.5px}
+.wt-org{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
+.wt-thesis{font-size:.82rem;color:var(--text-muted);line-height:1.7;max-width:90ch;margin-bottom:18px}
+.wt-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.wt-seg{display:inline-flex;border:2px solid var(--border)}
+.wt-seg button,.wt-btn{font:600 .68rem var(--font-mono);text-transform:uppercase;letter-spacing:1.5px;background:var(--bg-card);color:var(--text-muted);border:0;padding:8px 12px;cursor:pointer;transition:all .15s}
+.wt-seg button+button{border-left:2px solid var(--border)}
+.wt-seg button[aria-pressed="true"]{background:var(--bg-elevated);color:var(--orange)}
+.wt-btn{border:2px solid var(--border)}
+.wt-btn:hover{border-color:var(--orange);color:var(--orange)}
+.wt-btn.primary{background:var(--orange);color:var(--bg);border-color:#000;box-shadow:var(--shadow-sm)}
+.wt-btn.primary:hover{transform:translate(2px,2px);box-shadow:none;color:var(--bg)}
+.wt-spacer{flex:1}
+.wt-diagram{background:var(--bg-card);border:var(--border-w) solid var(--border);overflow-x:auto;margin-bottom:12px}
+.wt-diagram svg{display:block;width:100%;min-width:760px;height:auto}
+.wt-nd rect{fill:var(--bg-elevated);stroke:var(--border-strong);stroke-width:1.5;transition:fill .3s,stroke .3s}
+.wt-nd .t{font:700 13px var(--font-display);fill:var(--text)}
+.wt-nd .s{font:400 10px var(--font-mono);fill:var(--text-muted)}
+.wt-nd.ghost rect{stroke-dasharray:5 4;fill:var(--bg)}
+.wt-nd.src rect{stroke:var(--green);fill:rgba(34,197,94,.08)}
+.wt-nd.on rect{stroke:var(--orange);stroke-width:2.5;fill:rgba(255,95,31,.12)}
+.wt-grp rect{fill:rgba(255,255,255,.015);stroke:var(--border);stroke-dasharray:4 4}
+.wt-grp text{font:500 10px var(--font-mono);letter-spacing:2px;text-transform:uppercase;fill:var(--text-muted)}
+.wt-ed{fill:none;stroke:var(--border);stroke-width:1.6}
+.wt-ed.done{stroke:var(--green);opacity:.45}
+.wt-ed.act{stroke:var(--orange);stroke-width:2.6;opacity:1}
+.wt-pkt{fill:var(--orange);stroke:var(--bg);stroke-width:2}
+.wt-cap{background:var(--bg-card);border:2px solid var(--border);border-left:var(--border-w) solid var(--orange);padding:16px 20px;margin-bottom:12px;min-height:110px}
+.wt-cap .eb{font-size:.62rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted)}
+.wt-cap .route{font:700 .95rem var(--font-display);margin:4px 0 8px}
+.wt-cap .route span{color:var(--orange)}
+.wt-cap p{font-size:.8rem;color:var(--text-muted);line-height:1.7;max-width:90ch}
+.wt-cap .why{color:var(--green);margin-top:6px}
+.wt-chips{display:flex;flex-wrap:wrap;gap:6px}
+.wt-chip{font:500 .68rem var(--font-mono);background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);padding:5px 10px;cursor:pointer}
+.wt-chip b{color:var(--text-muted);margin-right:4px}
+.wt-chip.done{color:var(--green);border-color:var(--green)}
+.wt-chip.on{background:var(--orange);border-color:#000;color:var(--bg)}
+.wt-chip.on b{color:var(--bg)}
+.wt-hint{font-size:.65rem;color:var(--text-muted);margin-top:14px;letter-spacing:1px}
+.wt-tab:focus-visible,.wt-btn:focus-visible,.wt-chip:focus-visible,.wt-seg button:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
 /* ===== ROAMING AGENTS ===== */
 .agent{
   position:fixed;z-index:50;cursor:pointer;
@@ -798,6 +846,7 @@ section{padding:100px 0;position:relative}
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#builds">Builds</a>
+      <a href="#walkthroughs">Systems</a>
       <a href="#stack">Stack</a>
       <a href="#career">Career</a>
       <a href="#achievements">Impact</a>
@@ -982,11 +1031,25 @@ section{padding:100px 0;position:relative}
   </div>
 </section>
 
+<!-- SYSTEM WALKTHROUGHS -->
+<section id="walkthroughs" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">03 How It Works</div>
+      <h2 class="section-title">System <span class="muted">Walkthroughs</span></h2>
+    </div>
+    <p class="wt-thesis" style="margin-top:-40px;margin-bottom:28px">Pick a system and press <strong style="color:var(--text)">Play</strong>. The packet traces the order a request moves through the architecture, with what each step does and why it&rsquo;s there.</p>
+    <div class="wt-tabs" id="wtTabs" role="tablist" aria-label="Systems"></div>
+    <div id="wtView"></div>
+    <p class="wt-hint">// Click any numbered step to jump to it. High-level architecture only &mdash; internal details are simplified.</p>
+  </div>
+</section>
+
 <!-- TECH STACK -->
 <section id="stack" class="reveal">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">03 Stack</div>
+      <div class="section-label">04 Stack</div>
       <h2 class="section-title">Technical <span class="muted">Inventory</span></h2>
     </div>
 
@@ -1080,7 +1143,7 @@ section{padding:100px 0;position:relative}
 <section id="career" class="reveal">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">04 Career</div>
+      <div class="section-label">05 Career</div>
       <h2 class="section-title">Career <span class="muted">Timeline</span></h2>
     </div>
     <div class="timeline">
@@ -1122,7 +1185,7 @@ section{padding:100px 0;position:relative}
 <section id="achievements" class="reveal">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">05 Impact</div>
+      <div class="section-label">06 Impact</div>
       <h2 class="section-title">Mission <span class="muted">Log</span></h2>
     </div>
     <div class="achievements-grid">
@@ -1179,7 +1242,7 @@ section{padding:100px 0;position:relative}
 <section id="teaching" class="reveal">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">06 Teaching</div>
+      <div class="section-label">07 Teaching</div>
       <h2 class="section-title">Knowledge <span class="muted">Transfer</span></h2>
     </div>
     <div class="teaching-content">
@@ -1218,7 +1281,7 @@ section{padding:100px 0;position:relative}
 <section id="transmute" class="reveal">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">07 Venture</div>
+      <div class="section-label">08 Venture</div>
       <h2 class="section-title">Transmute<span class="muted">Labs</span></h2>
     </div>
     <div class="transmute-card">
@@ -1248,7 +1311,7 @@ section{padding:100px 0;position:relative}
 <section id="certs" class="reveal">
   <div class="container">
     <div class="section-header">
-      <div class="section-label">08 Credentials</div>
+      <div class="section-label">09 Credentials</div>
       <h2 class="section-title">Education &amp; <span class="muted">Awards</span></h2>
     </div>
     <div class="certs-list">
@@ -1288,7 +1351,7 @@ section{padding:100px 0;position:relative}
 <section id="connect" class="connect-section reveal">
   <div class="container" style="padding-top:100px;padding-bottom:60px">
     <div class="section-header">
-      <div class="section-label">09 Connect</div>
+      <div class="section-label">10 Connect</div>
       <h2 class="section-title">Let's <span class="muted">Talk</span></h2>
     </div>
     <div class="connect-grid">
@@ -1406,6 +1469,174 @@ const navEl = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
   navEl.style.borderBottomColor = window.scrollY > 50 ? 'var(--orange)' : 'var(--border)';
 }, { passive: true });
+
+// ===== SYSTEM WALKTHROUGHS =====
+(function(){
+  const root=document.getElementById('wtView'); if(!root) return;
+  const N=(id,x,y,w,h,t,s,st)=>({id,x,y,w,h,t,s:s||'',st:st||''});
+  const P=[
+  {tab:'Change Cortex',title:'Change Cortex + Keystone',org:'Clear Street · used across 15+ engineering teams',
+   thesis:'Keystone is the orchestrator; Change Cortex is one of its skills. A question goes to Keystone, which calls several skills in parallel. Inside Change Cortex four retrieval lanes run at once, get fused and reranked, and the evidence flows back for a cited answer.',
+   flows:[{name:'Query',H:510,groups:[[640,8,350,300,'Inside Change Cortex']],
+    nodes:[N('eng',20,240,140,56,'Engineer','asks in Slack / UI'),N('ks',190,226,200,84,'Keystone','orchestrator · Bedrock tool-use'),
+     N('cc',430,40,170,56,'Change Cortex','retrieval skill'),N('dep',430,150,170,56,'Dependency map','knowledge graph'),
+     N('dpl',430,260,170,56,'Deploy history','what changed, when'),N('more',430,370,170,56,'Other skills','runbooks · anomalies','ghost'),
+     N('alias',660,30,150,48,'Alias match','service nicknames'),N('ast',660,92,150,48,'Identifier index','code symbols'),
+     N('bm',660,154,150,48,'BM25','exact keywords'),N('fa',660,216,150,48,'FAISS','semantic meaning'),
+     N('rrf',845,60,130,56,'Rank fusion','reciprocal rank'),N('rr',845,170,130,56,'Rerank','Haiku · token budget'),
+     N('syn',190,420,200,64,'Sonnet synthesis','every claim cited'),N('ans',20,424,140,56,'Answer','under a minute')],
+    steps:[
+     {e:[['eng','ks']],k:'Ask',t:'An on-call engineer asks: "payments latency spiked — what changed, and who owns it?"'},
+     {e:[['ks','cc'],['ks','dep'],['ks','dpl']],k:'Pick skills',t:'Keystone reads its skill descriptions and calls several in one turn, in parallel. A light model routes; the strong model is saved for writing the answer.',w:'Parallel dispatch means a turn costs the slowest tool, not the sum of all of them.'},
+     {e:[['cc','alias'],['cc','ast'],['cc','bm'],['cc','fa']],k:'4 lanes',t:'Inside Change Cortex the query hits four lanes at once: service aliases, code identifiers, exact keywords and semantic meaning. Each query shape hits the index built for it.'},
+     {e:[['alias','rrf'],['ast','rrf'],['bm','rrf'],['fa','rrf']],k:'Fuse',t:'The four ranked lists are merged with reciprocal rank fusion — positions, not raw scores, so lanes with incomparable scoring can still be combined. Results that rank well in several lanes rise.',w:'Dense search blurs similar service names; lexical lanes catch exact tokens. They fail in opposite directions, so together they cover each other.'},
+     {e:[['rrf','rr']],k:'Rerank',t:'A small, fast model rescores the top candidates against the exact question. A score floor and a token budget decide what reaches synthesis.'},
+     {e:[['rr','cc',[[910,290],[620,290],[620,68]]],['dep','ks'],['dpl','ks']],k:'Evidence back',t:'Evidence returns to Keystone from every skill: ranked records, graph neighbours (owners, dependencies, services that tend to change together), and recent deploys.'},
+     {e:[['cc','ks']],k:'Collect',t:'Keystone loops if it needs more, within a bounded number of turns, then is forced to synthesise. Every tool call is logged.'},
+     {e:[['ks','syn']],k:'Synthesise',t:'Sonnet writes the answer from the evidence only, with each claim tied to a source. Anything it can’t ground is dropped.'},
+     {e:[['syn','ans']],k:'Answer',t:'Root-cause identification went from 15+ minutes to under 60 seconds — with the evidence attached for the engineer and a plain-English summary for business stakeholders.'}]}]},
+  {tab:'SARIMA platform',title:'SARIMA anomaly platform',org:'Clear Street · 20+ critical financial metrics',
+   thesis:'Two separate halves. Training runs weekly and writes a forecast with a prediction band for every metric. Detection runs continuously, comparing each live 15-minute value with its band and alerting only on a sustained breach.',
+   flows:[{name:'Weekly training',H:290,groups:[],
+    nodes:[N('prom',20,40,170,56,'Prometheus','20+ metrics · 15-min'),N('argo',210,40,170,56,'Argo CronWorkflow','weekly, markets closed'),
+     N('hash',400,40,170,56,'Change check','unchanged → skip'),N('fit',590,40,180,56,'SARIMA per metric','daily seasonality'),
+     N('lad',590,190,180,56,'Fallback models','never go blind'),N('store',810,115,160,64,'Forecast store','expected + 95% band')],
+    steps:[
+     {e:[['prom','argo']],k:'Pull',t:'Once a week, with markets closed and the week complete, an Argo workflow pulls each metric’s 15-minute series from Prometheus.'},
+     {e:[['argo','hash']],k:'Skip?',t:'If the data hasn’t changed, retraining is skipped to save compute.'},
+     {e:[['hash','fit']],k:'Fit',t:'One model per metric. Seasonal differencing against the same slot yesterday removes the daily shape; a light ARIMA models what’s left.',w:'A static threshold is too loose at quiet hours and too tight at peaks. The real question is “unusual for this metric at this time of day”.'},
+     {e:[['fit','lad']],k:'Fallback',t:'If a fit fails, step down to simpler models. Every metric always gets a forecast.'},
+     {e:[['fit','store'],['lad','store']],k:'Store',t:'Forecasts with 95% prediction intervals are versioned and stored for the detection side.'}]},
+    {name:'Live detection',H:410,groups:[],
+    nodes:[N('live',20,40,170,56,'Prometheus','live 15-min value'),N('store',20,190,170,56,'Forecast store','expected + band'),
+     N('det',230,110,180,70,'Detection daemon','Kubernetes · scaled out'),N('rule',450,110,180,70,'Breach rule','sustained, not single'),
+     N('ui',450,290,180,56,'Tuning UI','band width · deferral'),N('alert',670,40,170,56,'Slack + PagerDuty','alert'),
+     N('team',860,40,120,56,'Owning team','eng + ops'),N('hist',670,190,170,56,'Alert history','value · band · verdict'),
+     N('health',670,320,170,64,'Health metrics','false-positive rate · error')],
+    steps:[
+     {e:[['live','det'],['store','det']],k:'Compare',t:'Every 15 minutes the daemon compares the live value with that slot’s forecast and band. If a retrain fails, it keeps the last good model.',w:'Training and detection are decoupled, so detection never stops.'},
+     {e:[['det','rule']],k:'Breach?',t:'One point outside a 95% band happens about five times a day per metric on perfectly normal data — so a single breach never pages anyone.'},
+     {e:[['ui','rule']],k:'Tune',t:'Operations staff tune band width and how many consecutive breaches to wait for, so self-healing blips stay quiet.'},
+     {e:[['rule','alert']],k:'Alert',t:'A sustained breach raises a plain-language alert through Slack and PagerDuty — written for ops staff, not just engineers.'},
+     {e:[['alert','team']],k:'Judge',t:'The owning team decides whether it’s a real issue or a known cause.'},
+     {e:[['rule','hist'],['team','hist',[[920,215]]]],k:'Log',t:'Every alert is logged with its forecast, band, actual value and the team’s verdict.'},
+     {e:[['hist','health']],k:'Health',t:'False-positive rate, missed incidents and forecast error are tracked week on week.',w:'Outcome: ~80% less manual dashboard-watching across 20+ metrics.'}]}]},
+  {tab:'Fraud & sanctions',title:'Fraud & sanctions screening',org:'Morgan Stanley · Payments, Treasury & Cash Management',
+   thesis:'Existing list screening and rules keep running. ML is an added layer: the screening workflow calls a scoring service that builds per-entity features and runs three unsupervised detectors in parallel. Their votes set a risk tier, and an analyst decides.',
+   flows:[{name:'Scoring',H:510,groups:[[190,150,800,350,'ML scoring layer']],
+    nodes:[N('pay',20,60,150,64,'Payment','amount · parties · corridor'),N('eps',200,60,160,56,'Screening workflow','payments platform'),
+     N('ofac',420,20,180,48,'List screening','sanctions name match'),N('rules',420,84,180,48,'Rules engine','existing thresholds'),
+     N('api',210,230,160,56,'Scoring API','FastAPI service'),N('feat',420,230,170,56,'Feature builder','same code as training'),
+     N('hist',420,350,170,56,'Entity history','trailing window'),N('vfs',210,350,160,56,'Model registry','versioned'),
+     N('if',640,170,150,48,'Isolation Forest','global outliers'),N('oc',640,234,150,48,'One-Class SVM','tight boundary'),N('db',640,298,150,48,'DBSCAN','rings / clusters'),
+     N('vote',830,234,145,56,'Vote → tier','3/3 · 2/3 · 1/3'),N('queue',830,370,145,56,'Analyst queue','case + evidence'),
+     N('fb',610,420,190,64,'Disposition','feeds the baseline')],
+    steps:[
+     {e:[['pay','eps']],k:'Payment',t:'A payment enters the screening workflow.'},
+     {e:[['eps','ofac'],['eps','rules']],k:'Existing checks',t:'Sanctions list screening and the rules engine run as before.',w:'The ML augments list screening — it never replaces it.'},
+     {e:[['eps','api']],k:'Score',t:'The workflow calls the scoring service, a Python API.'},
+     {e:[['vfs','api']],k:'Models',t:'The service loads the current model versions from a registry, so a rollback is just loading the previous version.'},
+     {e:[['api','feat'],['hist','feat']],k:'Features',t:'Features measure deviation from the entity’s own normal: amount z-scores over a trailing window, counterparty novelty, velocity, off-hours activity, structuring patterns. The same code runs in training, which prevents training–serving skew.'},
+     {e:[['feat','if'],['feat','oc'],['feat','db']],k:'3 detectors',t:'Three detectors score in parallel, each sensitive to a different kind of unusual: global outliers, departures from a tight boundary, and coordinated clusters.'},
+     {e:[['if','vote'],['oc','vote'],['db','vote']],k:'Vote',t:'Scores live on incomparable scales, so they’re never averaged. The number of detectors that flagged a payment sets its tier.'},
+     {e:[['vote','queue']],k:'Triage',t:'The case reaches an analyst with its evidence — which detectors fired and which features deviated. Nothing is blocked automatically.'},
+     {e:[['queue','fb']],k:'Decide',t:'The analyst decides and the disposition is captured.'},
+     {e:[['fb','hist']],k:'Feedback',t:'Cleared alerts adjust the entity’s baseline so the same false positive stops recurring; confirmed cases build labels for a future supervised layer.',w:'Balancing risk, compliance and engineering — each with a different tolerance for false positives — was the real work.'}]}]},
+  {tab:'Barclays chatbot',title:'Support QA chatbot',org:'Barclays · Service Company Toolset',
+   thesis:'A retriever–reader pipeline: a small, fast model finds the passages, a stronger model extracts the exact answer span. Below a confidence threshold, the question goes to a person. Retrieval-augmented, before it was called RAG.',
+   flows:[{name:'Query',H:420,groups:[[420,8,190,170,'Retriever']],
+    nodes:[N('user',20,60,150,56,'Toolset user','asks a question'),N('hay',200,60,180,56,'Haystack pipeline','retriever → reader'),
+     N('qe',430,20,170,56,'MiniLM','embeds the question'),N('ds',430,110,170,56,'Document store','passage vectors'),
+     N('rd',640,60,180,64,'RoBERTa reader','answer span + score'),N('th',850,60,130,64,'Confident?','score ≥ threshold'),
+     N('ans',850,210,130,56,'Answer + source','exact quote'),N('hand',640,230,180,56,'Human support','hand-off'),N('ev',420,300,180,56,'Feedback set','improves the model')],
+    steps:[
+     {e:[['user','hay']],k:'Ask',t:'A user asks a question about one of the toolset applications.'},
+     {e:[['hay','qe']],k:'Embed',t:'Only the short question is embedded at query time, with MiniLM — small and fast, which matters because retrieval runs on every query.'},
+     {e:[['qe','ds']],k:'Retrieve',t:'The nearest passages come back. Passage vectors were computed once, offline.'},
+     {e:[['ds','rd',[[620,138]]]],k:'Read',t:'RoBERTa reads the question with each passage and predicts where the answer starts and ends.'},
+     {e:[['rd','th']],k:'Score',t:'The best span across passages carries a confidence score.'},
+     {e:[['th','ans']],k:'Answer',t:'Above the threshold it returns the exact span with its source — a verifiable quote, nothing invented.'},
+     {e:[['th','hand',[[915,170],[730,170]]]],k:'Hand off',t:'Below the threshold it doesn’t guess: the question goes to a person, seamlessly enough that customers couldn’t tell.'},
+     {e:[['hand','ev']],k:'Learn',t:'Handed-off questions and the answers people gave become evaluation and fine-tuning data.'},
+     {e:[['ans','user',[[915,390],[95,390]]]],k:'Reply',t:'10,000+ queries a day, +40% CSAT, and about 5,000 support hours saved every month.'}]}]}
+  ];
+
+  const NS_D=pts=>'M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' L');
+  const ctr=n=>[n.x+n.w/2,n.y+n.h/2];
+  function anchor(n,tx,ty){const[cx,cy]=ctr(n);const dx=tx-cx,dy=ty-cy;if(!dx&&!dy)return[cx,cy];const t=Math.min(dx?(n.w/2)/Math.abs(dx):1e9,dy?(n.h/2)/Math.abs(dy):1e9);return[cx+dx*t,cy+dy*t]}
+  function route(m,e,rev){const a=m[e[0]],b=m[e[1]],via=e[2]||[];const first=via.length?via[0]:ctr(b),last=via.length?via[via.length-1]:ctr(a);let pts=[anchor(a,first[0],first[1]),...via,anchor(b,last[0],last[1])];if(rev&&!via.length){const[x1,y1]=pts[0],[x2,y2]=pts[1];const L=Math.hypot(x2-x1,y2-y1)||1,ox=-(y2-y1)/L*5,oy=(x2-x1)/L*5;pts=pts.map(p=>[p[0]+ox,p[1]+oy])}return pts}
+  function plen(pts){let s=0;for(let i=1;i<pts.length;i++)s+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);return s}
+  function at(pts,f){let L=plen(pts)*f;for(let i=1;i<pts.length;i++){const s=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);if(L<=s){const r=s?L/s:0;return[pts[i-1][0]+(pts[i][0]-pts[i-1][0])*r,pts[i-1][1]+(pts[i][1]-pts[i-1][1])*r]}L-=s}return pts[pts.length-1]}
+  function wrap(t,max){const w=t.split(' ');const out=[];let cur='';for(const x of w){if((cur+' '+x).trim().length>max&&cur){out.push(cur);cur=x}else cur=(cur+' '+x).trim()}if(cur)out.push(cur);return out}
+
+  const S={p:0,f:0,i:0,timer:null,raf:null};
+  const q=sel=>root.querySelector(sel);
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const tabs=document.getElementById('wtTabs');
+  const keysOf=F=>{const k=new Set();F.steps.forEach(s=>s.e.forEach(e=>k.add(e[0]+'>'+e[1])));return k};
+  const mapOf=F=>{const m={};F.nodes.forEach(n=>m[n.id]=n);return m};
+
+  function renderTabs(){
+    tabs.innerHTML=P.map((p,i)=>`<button class="wt-tab" role="tab" aria-selected="${i===S.p}" data-i="${i}">${p.tab}</button>`).join('');
+    tabs.querySelectorAll('.wt-tab').forEach(b=>b.onclick=()=>{stop();S.p=+b.dataset.i;S.f=0;S.i=0;render()});
+  }
+  function render(){
+    renderTabs();
+    const p=P[S.p],F=p.flows[S.f];
+    root.innerHTML=`<div class="wt-head"><h3>${p.title}</h3><span class="wt-org">// ${p.org}</span></div>
+      <p class="wt-thesis">${p.thesis}</p>
+      <div class="wt-bar">${p.flows.length>1?`<div class="wt-seg" role="group" aria-label="Flow">${p.flows.map((f,i)=>`<button data-f="${i}" aria-pressed="${i===S.f}">${f.name}</button>`).join('')}</div>`:''}
+        <span class="wt-spacer"></span>
+        <button class="wt-btn primary" data-act="play">&#9654; Play</button><button class="wt-btn" data-act="prev" aria-label="Previous step">&larr;</button><button class="wt-btn" data-act="next" aria-label="Next step">&rarr;</button></div>
+      <div class="wt-diagram"><svg viewBox="0 0 1000 ${F.H}" role="img" aria-label="${p.title}: ${F.name} architecture"></svg></div>
+      <div class="wt-cap" aria-live="polite"></div>
+      <div class="wt-chips">${F.steps.map((s,i)=>`<button class="wt-chip" data-i="${i}"><b>${i+1}</b>${s.k}</button>`).join('')}</div>`;
+    root.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{stop();S.f=+b.dataset.f;S.i=0;render()});
+    root.querySelectorAll('.wt-chip').forEach(b=>b.onclick=()=>{stop();go(+b.dataset.i)});
+    q('[data-act=play]').onclick=()=>S.timer?stop():play();
+    q('[data-act=prev]').onclick=()=>{stop();go(S.i-1)};
+    q('[data-act=next]').onclick=()=>{stop();go(S.i+1)};
+    draw();go(S.i);
+  }
+  function draw(){
+    const F=P[S.p].flows[S.f],m=mapOf(F),keys=keysOf(F);let h='';
+    F.groups.forEach(g=>h+=`<g class="wt-grp"><rect x="${g[0]}" y="${g[1]}" width="${g[2]}" height="${g[3]}"/><text x="${g[0]+10}" y="${g[1]+g[3]-8}">${g[4]}</text></g>`);
+    h+=`<defs><marker id="wtAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF5F1F"/></marker></defs>`;
+    F.steps.forEach((s,si)=>s.e.forEach(e=>{h+=`<path class="wt-ed" data-s="${si}" d="${NS_D(route(m,e,keys.has(e[1]+'>'+e[0])))}"/>`}));
+    F.nodes.forEach(n=>{const lines=wrap(n.s,Math.max(14,Math.floor(n.w/6.4)));const ty=n.y+(lines.length>1||n.h<52?18:22)+(n.h>60?6:0);
+      h+=`<g class="wt-nd ${n.st}" data-n="${n.id}"><rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}"/><text class="t" x="${n.x+10}" y="${ty}">${n.t}</text>${lines.slice(0,2).map((l,k)=>`<text class="s" x="${n.x+10}" y="${ty+15+k*13}">${l}</text>`).join('')}</g>`});
+    h+='<g class="wt-act"></g><g class="wt-pk"></g>';
+    q('svg').innerHTML=h;
+  }
+  function go(i){
+    const F=P[S.p].flows[S.f];if(i<0||i>=F.steps.length)return;S.i=i;
+    const m=mapOf(F),keys=keysOf(F);
+    root.querySelectorAll('.wt-ed').forEach(p=>p.setAttribute('class','wt-ed'+(+p.dataset.s<i?' done':'')));
+    const st=F.steps[i],src=new Set(st.e.map(e=>e[0])),dst=new Set(st.e.map(e=>e[1]));
+    root.querySelectorAll('.wt-nd').forEach(g=>{const id=g.dataset.n;g.classList.toggle('on',dst.has(id));g.classList.toggle('src',src.has(id)&&!dst.has(id))});
+    const routes=st.e.map(e=>route(m,e,keys.has(e[1]+'>'+e[0])));
+    q('.wt-act').innerHTML=routes.map(r=>`<path class="wt-ed act" d="${NS_D(r)}" marker-end="url(#wtAr)"/>`).join('');
+    root.querySelectorAll('.wt-chip').forEach((c,k)=>{c.classList.toggle('on',k===i);c.classList.toggle('done',k<i)});
+    animate(routes);caption();
+  }
+  function animate(routes){
+    cancelAnimationFrame(S.raf);const pk=q('.wt-pk');
+    pk.innerHTML=routes.map(()=>'<circle class="wt-pkt" r="7"/>').join('');const cs=[...pk.children];
+    if(reduce){cs.forEach((c,k)=>{const p=at(routes[k],1);c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1])});return}
+    const t0=performance.now(),dur=1100;
+    const tick=t=>{const f=Math.min(1,(t-t0)/dur),e=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;cs.forEach((c,k)=>{const p=at(routes[k],e);c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1])});if(f<1)S.raf=requestAnimationFrame(tick)};
+    S.raf=requestAnimationFrame(tick);
+  }
+  function caption(){
+    const F=P[S.p].flows[S.f],st=F.steps[S.i],m={};F.nodes.forEach(n=>m[n.id]=n.t);
+    const r=[...new Set(st.e.map(e=>`${m[e[0]]} <span>&rarr;</span> ${m[e[1]]}`))].join(' &middot; ');
+    q('.wt-cap').innerHTML=`<div class="eb">Step ${S.i+1} of ${F.steps.length} &middot; ${F.name}</div><div class="route">${r}</div><p>${st.t}</p>${st.w?`<p class="why">// ${st.w}</p>`:''}`;
+  }
+  function play(){const F=P[S.p].flows[S.f];if(S.i>=F.steps.length-1)go(0);q('[data-act=play]').innerHTML='&#10074;&#10074; Pause';
+    S.timer=setInterval(()=>{if(S.i>=P[S.p].flows[S.f].steps.length-1){stop();return}go(S.i+1)},5200)}
+  function stop(){if(S.timer){clearInterval(S.timer);S.timer=null}const b=q('[data-act=play]');if(b)b.innerHTML='&#9654; Play'}
+  render();
+})();
 
 // ===== AI MISSION CONTROL =====
 (function() {
