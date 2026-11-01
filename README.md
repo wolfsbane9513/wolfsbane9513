@@ -1,7 +1,7 @@
 # [ OPERATOR_PROFILE ]: RAVI PRAKASH
-`SYSTEM_STATUS: OPERATIONAL` /// `LOCATION: BENGALURU, IN` /// `ROLE: STAFF_PRODUCTION_ENGINEER` /// `SPEC: AI/ML + LLM + AUTOMATION`
+`SYSTEM_STATUS: OPERATIONAL` /// `LOCATION: BENGALURU, IN` /// `ROLE: SENIOR_ENGINEER // PRODUCTION_ENGINEERING @ CLEAR_STREET` /// `SPEC: AI/ML + LLM + AUTOMATION`
 
-`// DESIGNATIONS: Staff Production Engineer | AI/ML Specialist | LLM & Automation Educator | Co-founder @ TransmuteLabs`
+`// DESIGNATIONS: Senior Engineer, Production Engineering @ Clear Street | GenAI Curriculum Designer @ IIT Patna | Co-founder @ TransmuteLabs`
 
 [LinkedIn](https://www.linkedin.com/in/wolfsbane9513/) | [GitHub](https://github.com/wolfsbane9513) | [Email](mailto:mravip9513@gmail.com) | [TransmuteLabs](https://transmutelabs.in)
 
@@ -9,7 +9,7 @@
 
 ### [ SYSTEM_CORE ]
 **The Production AI Architect**
-12+ years engineering production-grade AI systems across **FinTech, payments, fraud detection, and compliance** at Morgan Stanley, Barclays, and Cognizant. Currently at **ClearStreet** (via Wissen Technologies), architecting RAG systems, LLM-powered pipelines, and real-time anomaly detection at scale. Also running cohort-based courses on **n8n** and **make.com**, and co-founded **TransmuteLabs** — an AI consulting practice.
+13 years in financial services building AI systems that engineers and business teams can both act on. Currently **Senior Engineer, Production Engineering at Clear Street** (full-time since Oct 2025, embedded via Wissen from Oct 2024) — building Change Cortex, Keystone and the Incident Management Hub on AWS Bedrock. Previously VP at **Morgan Stanley**, then Barclays and Cognizant. Industry Expert & Curriculum Designer for **IIT Patna's Generative AI Programme**, and co-founder of **TransmuteLabs**.
 
 > `INITIALIZING...`
 > `LOADING_SKILL_MODULES...`
@@ -67,8 +67,11 @@
 ### [ CAREER_TIMELINE ]
 
 ```
-2024 – PRESENT  >>>  STAFF PRODUCTION ENGINEER  @  ClearStreet (via Wissen)
-                     // RAG systems, anomaly detection, Kafka/K8s pipelines
+2025 – PRESENT  >>>  SENIOR ENGINEER, PROD ENG  @  Clear Street
+                     // Change Cortex, Incident Mgmt Hub, AWS asset discovery
+
+2024 – 2025     >>>  SENIOR PRINCIPAL ENGINEER  @  Wissen (embedded at Clear Street)
+                     // SARIMA anomaly detection, Milestone Tracker, Keystone
 
 2021 – 2024     >>>  VICE PRESIDENT  @  Morgan Stanley
                      // Payments fraud ML, LSTM anomaly detection, RAG log analysis
@@ -84,12 +87,14 @@
 
 ### [ MISSION_LOG // HIGHLIGHTS ]
 
+*   `[ACHIEVED]` **<60s incident root cause** (from 15+ min) via Change Cortex at Clear Street
+*   `[ACHIEVED]` **<2 min stakeholder notification** (from 15) via Incident Management Hub
+*   `[ACHIEVED]` **70% fewer false-positive vendor alerts**; **~80% less manual monitoring** at Clear Street
 *   `[ACHIEVED]` **40% reduction** in manual log analysis time via RAG + LLM system at Morgan Stanley (1M+ daily logs)
 *   `[ACHIEVED]` **30% improvement** in fraud detection via LSTM models on Swift Network transactions
-*   `[ACHIEVED]` **30% efficiency gain** in resource allocation via SARIMA forecasting + anomaly detection on Kubernetes
 *   `[ACHIEVED]` **50% reduction** in critical incidents via production AI-driven log intelligence system
 *   `[ACHIEVED]` Built automation systems saving **$180,000 annually** at Cognizant by eliminating 3 FTE
-*   `[AWARDED]` **ISB Grass Roots Innovation** — two consecutive quarters at Morgan Stanley
+*   `[AWARDED]` **Grass Roots Innovation** (two consecutive quarters) & **Most Creative Booth** — Morgan Stanley
 
 ---
 
@@ -97,10 +102,10 @@
 
 `// KNOWLEDGE_TRANSFER_PROTOCOL`
 
-Running **cohort-based automation courses** teaching working professionals how to build AI-powered workflows with **n8n** and **make.com** — from zero-code automations to multi-agent LLM pipelines.
+**Industry Expert & Curriculum Designer, IIT Patna Generative AI Programme** (Sep 2024 – present) — designing and teaching the AI automation track for mixed cohorts of developers, tech leads, ops managers and business leaders.
 
-*   :mortar_board: **STUDENTS_TRAINED:** `100+ professionals` across cohorts
-*   :page_facing_up: **COURSE_MODULES:** `Project Management Automation` / `Voice Agents` / `n8n Workflows` / `AI-powered Apps`
+*   :mortar_board: **STUDENTS_TRAINED:** `100–140 professionals` per cohort
+*   :page_facing_up: **COURSE_MODULES:** `Make.com agentic loops` / `n8n` / `Voice Agents (Retell, ElevenLabs)` / `RAG with Supabase` / `MCP`
 *   :link: Active on LinkedIn sharing automation tutorials and AI insights
 
 ---
@@ -159,4 +164,4 @@ Co-founded **TransmuteLabs** with [Sruthi Vijayakumar](https://www.linkedin.com/
 [LinkedIn](https://www.linkedin.com/in/wolfsbane9513/) | [Email](mailto:mravip9513@gmail.com) | [TransmuteLabs](https://transmutelabs.in)
 
 ---
-`© 2026 RAVI PRAKASH // BUILT WITH 12 YEARS OF PRODUCTION ML EXPERIENCE // BENGALURU, INDIA // END_OF_TRANSMISSION`
+`© 2026 RAVI PRAKASH // BUILT ON 13 YEARS OF PRODUCTION SYSTEMS // BENGALURU, INDIA // END_OF_TRANSMISSION`
