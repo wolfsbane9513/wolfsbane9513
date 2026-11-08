@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Maddula family sent you a Diwali gift 🪔</title>
+<meta name="description" content="Tap to open your Diwali gift — best with the sound on.">
+<meta name="theme-color" content="#070b14">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Maddula family sent you a Diwali gift 🪔">
+<meta property="og:description" content="Tap to open your Diwali gift — best with the sound on.">
+<meta property="og:url" content="https://wolfsbane9513.github.io/wolfsbane9513/diwali/">
+<meta property="og:image" content="https://wolfsbane9513.github.io/wolfsbane9513/diwali/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;400;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b14; --gold:#ffcf5a; --gold2:#ff9f1c; --saffron:#ff6b1a; --pink:#ff3e8a; --ink:#fdf3dc;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;background:var(--bg);color:var(--ink);font-family:'Poppins',system-ui,sans-serif;overflow:hidden}
+  body{background:radial-gradient(ellipse at 50% 120%,#3a1606 0%,#140a12 40%,var(--bg) 75%)}
+  canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:11;pointer-events:none}
+  #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite ease-in-out}
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.9}}
+
+  /* ---------- Intro / gift ---------- */
+  #intro{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;cursor:pointer;text-align:center;padding:24px;transition:opacity .9s ease, transform .9s ease}
+  #intro.gone{opacity:0;transform:scale(1.15);pointer-events:none}
+  .from-line{font-size:clamp(15px,4vw,19px);font-weight:300;letter-spacing:.3px;opacity:.9;max-width:420px;line-height:1.5}
+  .from-line b{font-weight:600;color:var(--gold)}
+  .gift{position:relative;width:170px;height:170px;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 40px rgba(255,170,40,.45))}
+  .gift.shake{animation:shake .5s ease-in-out}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(2deg)}}
+  @keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-10deg)}40%{transform:rotate(10deg)}60%{transform:rotate(-7deg)}80%{transform:rotate(7deg)}}
+  .box{position:absolute;bottom:0;left:10px;width:150px;height:110px;border-radius:10px;background:linear-gradient(135deg,#c2185b,#7b1238);box-shadow:inset 0 -10px 20px rgba(0,0,0,.3)}
+  .box::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:26px;transform:translateX(-50%);background:linear-gradient(90deg,#e8a915,#ffe08a,#e8a915)}
+  .box .pattern{position:absolute;inset:0;border-radius:10px;opacity:.25;background-image:radial-gradient(circle at 20px 20px,#ffd166 2px,transparent 3px);background-size:28px 28px}
+  .lid{position:absolute;top:40px;left:0;width:170px;height:34px;border-radius:8px;background:linear-gradient(135deg,#e91e63,#9c1449);transform-origin:20% 100%;transition:transform .8s cubic-bezier(.3,1.6,.5,1),opacity .8s;z-index:2}
+  .lid::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:28px;transform:translateX(-50%);background:linear-gradient(90deg,#e8a915,#ffe08a,#e8a915)}
+  .bow{position:absolute;left:50%;top:-30px;transform:translateX(-50%);width:80px;height:36px}
+  .bow::before,.bow::after{content:"";position:absolute;top:4px;width:36px;height:28px;border:7px solid #ffd166;border-radius:50% 50% 50% 50%/60% 60% 40% 40%}
+  .bow::before{left:0;transform:rotate(-20deg)} .bow::after{right:0;transform:rotate(20deg)}
+  .gift.open .lid{transform:translate(-40px,-160px) rotate(-55deg);opacity:0}
+  .glow{position:absolute;left:50%;bottom:60px;width:10px;height:10px;transform:translate(-50%,0);border-radius:50%;background:#fff6c8;box-shadow:0 0 60px 30px #ffcf5a;opacity:0;transition:all .9s ease-out}
+  .gift.open .glow{opacity:1;width:400px;height:400px;bottom:-120px;box-shadow:0 0 200px 120px #ffcf5a}
+  .tap{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);animation:pulse 1.6s infinite}
+  .tap small{display:block;margin-top:8px;letter-spacing:.5px;text-transform:none;opacity:.7;color:var(--ink);font-size:12px}
+  @keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+
+  /* ---------- Main ---------- */
+  #main{position:fixed;inset:0;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 18px 170px;text-align:center;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+  #main.show{opacity:1}
+  #main .interactive{pointer-events:auto}
+  .rangoli{position:absolute;top:50%;left:50%;width:min(110vw,620px);height:min(110vw,620px);transform:translate(-50%,-58%);opacity:.18;animation:spin 60s linear infinite;z-index:-1}
+  @keyframes spin{to{transform:translate(-50%,-58%) rotate(360deg)}}
+  .hindi{font-family:'Tiro Devanagari Hindi',serif;font-size:clamp(28px,8vw,46px);color:var(--gold);opacity:0;transform:translateY(20px);text-shadow:0 0 18px rgba(255,180,50,.6)}
+  h1{font-family:'Cinzel Decorative',serif;font-size:clamp(42px,12vw,92px);line-height:1.05;margin:6px 0 14px;
+     background:linear-gradient(100deg,#ffb347 0%,#fff3b0 30%,#ffcf5a 50%,#ff9f1c 70%,#fff3b0 100%);background-size:200% auto;
+     -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s linear infinite;
+     filter:drop-shadow(0 0 22px rgba(255,160,40,.45));opacity:0;transform:scale(.6)}
+  @keyframes shimmer{to{background-position:200% center}}
+  .msg{text-shadow:0 1px 8px #070b14,0 0 2px #070b14;max-width:520px;font-size:clamp(14px,3.8vw,17px);font-weight:300;line-height:1.7;opacity:0;transform:translateY(16px)}
+  .with-love{margin-top:26px;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold2);opacity:0}
+  .names{margin-top:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;max-width:560px}
+  .name{padding:7px 14px;border-radius:999px;font-size:clamp(13px,3.6vw,15px);font-weight:400;
+        background:rgba(255,207,90,.08);border:1px solid rgba(255,207,90,.35);box-shadow:0 0 14px rgba(255,170,40,.12) inset;
+        opacity:0;transform:translateY(14px) scale(.9)}
+  .reveal{transition:opacity 1s ease, transform 1s cubic-bezier(.2,1.4,.4,1)}
+  .in{opacity:1 !important;transform:none !important}
+
+  .actions{position:relative;z-index:12;margin-top:22px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;opacity:0;transform:translateY(20px);pointer-events:none}
+  #main .actions.in{pointer-events:auto}
+  .btn{border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;padding:12px 20px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+  .btn:active{transform:scale(.95)}
+  .btn.primary{background:linear-gradient(135deg,#ffcf5a,#ff8a00);color:#2a1300;box-shadow:0 6px 24px rgba(255,140,0,.45)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px)}
+  .toast{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);background:#1d1426;border:1px solid rgba(255,207,90,.4);padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;transition:all .3s;z-index:30;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  #mute{position:fixed;top:calc(14px + env(safe-area-inset-top));right:14px;z-index:25;width:42px;height:42px;padding:0;justify-content:center;font-size:18px;display:none}
+
+  /* ground scene */
+  .scene{position:fixed;left:0;right:0;bottom:0;height:calc(160px + env(safe-area-inset-bottom));z-index:10;pointer-events:none;opacity:0;transition:opacity 1.5s}
+  .scene.in{opacity:1}
+  .ground{position:absolute;left:0;right:0;bottom:0;height:calc(34px + env(safe-area-inset-bottom));background:linear-gradient(#3a1d0a,#120804);border-top:2px solid #7a3d12;box-shadow:0 -10px 40px rgba(255,140,40,.15)}
+  .ground::before{content:"";position:absolute;left:0;right:0;top:4px;height:8px;opacity:.5;background:repeating-linear-gradient(90deg,#ff3e8a 0 6px,transparent 6px 12px,#ffcf5a 12px 18px,transparent 18px 24px)}
+  .diyas{position:absolute;left:0;right:0;bottom:calc(34px + env(safe-area-inset-bottom));display:flex;justify-content:space-evenly;align-items:flex-end;opacity:.95}
+  .actor{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom))}
+  .kid{left:calc(50% - 170px);width:86px;transform-origin:50% 100%;transition:transform .7s cubic-bezier(.4,1.3,.5,1)}
+  .kid.lean{transform:translateX(16px) rotate(8deg)}
+  .kid.back{transform:translateX(-12px) rotate(-4deg)}
+  .kid.jump{animation:jump .45s ease-out 3}
+  @keyframes jump{0%,100%{transform:translateX(-12px) translateY(0)}50%{transform:translateX(-12px) translateY(-18px)}}
+  .kid #arm{transform-box:view-box;transform-origin:56px 62px;transform:rotate(-55deg);transition:transform .7s ease}
+  .kid.lean #arm{transform:rotate(8deg)}
+  .kid.jump #arm,.kid.back #arm{transform:rotate(-95deg)}
+  .kid .mouth-o{display:none} .kid.jump .mouth-o,.kid.back .mouth-o{display:block} .kid.jump .mouth-s,.kid.back .mouth-s{display:none}
+  .anar{left:calc(50% - 72px);width:30px}
+  .chakri{left:calc(50% + 105px);width:38px;bottom:calc(36px + env(safe-area-inset-bottom))}
+  .chakri svg{display:block}
+  .bomb{left:calc(50% + 60px);width:22px}
+  @media (max-width:380px){.kid{left:8px}.anar{left:110px}.bomb{left:auto;right:96px}.chakri{left:auto;right:30px}}
+  .diya{position:relative;width:54px;height:22px;transform:scale(.7);transform-origin:50% 100%}
+  .diya .bowl{position:absolute;bottom:0;width:54px;height:22px;border-radius:0 0 30px 30px/0 0 22px 22px;background:linear-gradient(180deg,#d2691e,#8b3a0e);box-shadow:inset 0 3px 0 #f4a259}
+  .diya .flame{position:absolute;left:50%;bottom:18px;width:12px;height:24px;margin-left:-6px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+               background:radial-gradient(ellipse at 50% 75%,#fff 0%,#ffe066 30%,#ff9f1c 65%,rgba(255,80,0,0) 100%);transform-origin:50% 90%;animation:flicker .15s infinite alternate;
+               box-shadow:0 0 18px 6px rgba(255,170,40,.55),0 0 50px 18px rgba(255,120,0,.25)}
+  @keyframes flicker{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(.92,1.08) rotate(2deg)}}
+  @media (max-width:480px){.diya:nth-child(n+6){display:none}}
+
+  /* lanterns */
+  .lantern{position:fixed;bottom:-80px;z-index:3;width:26px;height:36px;border-radius:40% 40% 30% 30%;pointer-events:none;
+           background:radial-gradient(ellipse at 50% 70%,#fff2a8 0%,#ffb347 45%,#e8590c 100%);box-shadow:0 0 22px 8px rgba(255,150,40,.4);opacity:.85;
+           animation:rise linear forwards}
+  @keyframes rise{0%{transform:translate(0,0) rotate(-4deg)}50%{transform:translate(var(--dx),-60vh) rotate(4deg)}100%{transform:translate(calc(var(--dx)*-.5),-125vh) rotate(-3deg);opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){.rangoli,.gift{animation:none}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<canvas id="fx"></canvas>
+
+<!-- INTRO -->
+<div id="intro" role="button" aria-label="Open your Diwali gift" tabindex="0">
+  <p class="from-line">The <b>Maddula family</b> has sent you a Diwali gift</p>
+  <div class="gift" id="gift">
+    <div class="glow"></div>
+    <div class="box"><div class="pattern"></div></div>
+    <div class="lid"><div class="bow"></div></div>
+  </div>
+  <p class="tap">Tap to open<small>best with the sound on 🔊</small></p>
+</div>
+
+<button class="btn ghost interactive" id="mute" aria-label="Toggle sound">🔊</button>
+
+<!-- MAIN -->
+<main id="main">
+  <svg class="rangoli" viewBox="-100 -100 200 200" aria-hidden="true">
+    <g fill="none" stroke-width="1.2">
+      <circle r="92" stroke="#ffcf5a"/><circle r="70" stroke="#ff3e8a" stroke-dasharray="3 4"/>
+      <circle r="18" stroke="#ffcf5a" fill="rgba(255,207,90,.25)"/>
+    </g>
+    <g id="petals"></g>
+  </svg>
+  <div class="hindi reveal" id="hindi">शुभ दीपावली</div>
+  <h1 class="reveal" id="title">Happy Diwali</h1>
+  <p class="msg reveal" id="msg">May the glow of a thousand diyas light up your home with joy, fill your heart with peace, and bring a year of health, success and prosperity. Wishing you and your loved ones a sparkling Diwali and a bright new year ahead!</p>
+  <div class="with-love reveal" id="withLove">✦ With love from ✦</div>
+  <div class="names" id="names"></div>
+  <div class="actions reveal" id="actions">
+    <button class="btn primary" id="shareBtn">📤 Share this wish</button>
+    <button class="btn ghost" id="waBtn">WhatsApp</button>
+    <button class="btn ghost" id="copyBtn">🔗 Copy link</button>
+    <button class="btn ghost" id="replayBtn">↻ Replay</button>
+  </div>
+</main>
+<div class="toast" id="toast">Link copied!</div>
+
+<!-- GROUND SCENE: kid lighting crackers -->
+<div class="scene" id="scene" aria-hidden="true">
+  <div class="ground"></div>
+  <div class="diyas" id="diyas"></div>
+
+  <!-- the kid -->
+  <svg class="actor kid" id="kid" viewBox="0 0 100 130">
+    <!-- legs -->
+    <rect x="38" y="96" width="10" height="28" rx="4" fill="#f5e6c8"/>
+    <rect x="53" y="96" width="10" height="28" rx="4" fill="#f5e6c8"/>
+    <ellipse cx="44" cy="126" rx="8" ry="4" fill="#5b2c0f"/>
+    <ellipse cx="60" cy="126" rx="8" ry="4" fill="#5b2c0f"/>
+    <!-- back arm -->
+    <path d="M44 62 Q34 76 38 88" stroke="#b9773f" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <!-- kurta -->
+    <path d="M36 56 Q50 50 64 56 L70 100 Q50 104 30 100 Z" fill="#ff9f1c"/>
+    <path d="M50 54 L50 98" stroke="#d9480f" stroke-width="2"/>
+    <circle cx="50" cy="66" r="1.6" fill="#ffe08a"/><circle cx="50" cy="74" r="1.6" fill="#ffe08a"/><circle cx="50" cy="82" r="1.6" fill="#ffe08a"/>
+    <path d="M30 100 Q50 104 70 100 L70 96 Q50 100 30 96Z" fill="#ffcf5a"/>
+    <!-- head -->
+    <rect x="45" y="44" width="10" height="10" fill="#b9773f"/>
+    <circle cx="52" cy="32" r="19" fill="#c68642"/>
+    <path d="M33 30 Q34 10 54 12 Q72 13 71 30 Q66 20 56 21 Q44 18 40 26 Q36 30 33 30Z" fill="#1b0f08"/>
+    <ellipse cx="34" cy="34" rx="3.5" ry="5" fill="#b9773f"/>
+    <circle cx="62" cy="31" r="2.6" fill="#1b0f08"/><circle cx="63" cy="30" r=".9" fill="#fff"/>
+    <circle cx="65" cy="39" r="3.4" fill="#ff7a7a" opacity=".45"/>
+    <path class="mouth-s" d="M58 41 Q63 45 68 40" stroke="#5b1a0a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse class="mouth-o" cx="63" cy="42" rx="3.2" ry="3.8" fill="#5b1a0a"/>
+    <!-- front arm holding sparkler -->
+    <g id="arm">
+      <path d="M56 62 Q66 70 72 78" stroke="#c68642" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M57 60 Q64 64 66 70" stroke="#ff9f1c" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <line x1="72" y1="78" x2="98" y2="104" stroke="#777" stroke-width="2"/>
+      <line x1="88" y1="94" x2="98" y2="104" stroke="#3b3b3b" stroke-width="3.2" stroke-linecap="round"/>
+      <circle cx="72" cy="78" r="4.2" fill="#c68642"/>
+      <circle id="tip" cx="98" cy="104" r="2.5" fill="#fff6c8"/>
+    </g>
+  </svg>
+
+  <!-- anar / flowerpot -->
+  <svg class="actor anar" id="anar" viewBox="0 0 30 40">
+    <path d="M15 2 L27 38 L3 38 Z" fill="#e63946"/>
+    <path d="M11 14 L19 14 L21 20 L9 20Z" fill="#ffcf5a"/>
+    <path d="M7 27 L23 27 L25 32 L5 32Z" fill="#2a9d8f"/>
+    <rect x="2" y="36" width="26" height="4" rx="1" fill="#8d1b24"/>
+    <line x1="15" y1="2" x2="17" y2="-2" stroke="#ddd" stroke-width="1"/>
+    <circle id="anarTip" cx="15" cy="3" r="1" fill="#ffcf5a"/>
+  </svg>
+
+  <!-- sutli bomb -->
+  <svg class="actor bomb" id="bomb" viewBox="0 0 22 22">
+    <circle cx="11" cy="13" r="9" fill="#c9a66b"/>
+    <path d="M3 10 Q11 16 19 10 M3 15 Q11 9 19 15 M5 7 Q11 19 17 7" stroke="#8b6b3a" stroke-width="1.2" fill="none"/>
+    <path id="bombFuse" d="M11 4 Q13 0 16 1" stroke="#ddd" stroke-width="1.2" fill="none"/>
+  </svg>
+
+  <!-- chakri / ground spinner -->
+  <div class="actor chakri" id="chakri">
+    <svg viewBox="-20 -20 40 40" id="chakriSvg">
+      <path d="M0 0 m0 -3 a3 3 0 1 1 -0.1 0 m0.1 -3 a6 6 0 1 1 -0.1 0 m0.1 -3 a9 9 0 1 1 -0.1 0 m0.1 -3 a12 12 0 1 1 -0.1 0 m0.1 -3 a15 15 0 1 1 -0.1 0" stroke="#3a86ff" stroke-width="2.4" fill="none"/>
+      <circle r="17.5" fill="none" stroke="#ffbe0b" stroke-width="1.4" stroke-dasharray="4 3"/>
+      <circle r="3" fill="#ff006e"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+(() => {
+  const FAMILY = ["Maddula Ramakrishna","Maddula Ramadevi","Maddula Ravi Prakash","Sruthi Vijayakumar","Maddula Yash Vir"];
+  const $ = s => document.querySelector(s);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- stars ---------- */
+  const stars = $('#stars');
+  for (let i=0;i<90;i++){const s=document.createElement('div');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*70+'%';s.style.animationDelay=(Math.random()*3)+'s';s.style.opacity=Math.random();if(Math.random()<.15){s.style.width=s.style.height='3px'}stars.appendChild(s)}
+
+  /* ---------- rangoli petals ---------- */
+  const petals = $('#petals'); const cols=['#ffcf5a','#ff3e8a','#ff9f1c','#4dd0e1'];
+  let svg='';
+  for(let i=0;i<16;i++){const a=i*22.5;svg+=`<path transform="rotate(${a})" d="M0 -20 C 12 -40, 12 -60, 0 -86 C -12 -60, -12 -40, 0 -20Z" fill="none" stroke="${cols[i%4]}" stroke-width="1.2"/>`;
+    svg+=`<circle transform="rotate(${a+11.25})" cy="-78" r="3" fill="${cols[(i+2)%4]}"/>`;}
+  petals.innerHTML=svg;
+
+  /* ---------- diyas ---------- */
+  const diyas=$('#diyas'); for(let i=0;i<9;i++){const d=document.createElement('div');d.className='diya';d.innerHTML='<div class="flame" style="animation-delay:'+(Math.random()*.3)+'s"></div><div class="bowl"></div>';diyas.appendChild(d)}
+
+  /* ---------- names ---------- */
+  const namesEl=$('#names'); FAMILY.forEach(n=>{const s=document.createElement('span');s.className='name reveal';s.textContent=n;namesEl.appendChild(s)});
+
+  /* ---------- AUDIO (synthesised, no files) ---------- */
+  let ac=null, master=null, muted=false, noiseBuf=null;
+  function initAudio(){
+    if(ac) return; try{
+      ac=new (window.AudioContext||window.webkitAudioContext)(); master=ac.createGain(); master.gain.value=.6; master.connect(ac.destination);
+      noiseBuf=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate); const d=noiseBuf.getChannelData(0); for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    }catch(e){ac=null}
+  }
+  function boom(size=1, pan=0){
+    if(!ac||muted) return; const t=ac.currentTime;
+    const src=ac.createBufferSource(); src.buffer=noiseBuf;
+    const f=ac.createBiquadFilter(); f.type='lowpass'; f.frequency.setValueAtTime(1800,t); f.frequency.exponentialRampToValueAtTime(120,t+1.2);
+    const g=ac.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.55*size,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+1.4+size*.4);
+    let node=g; if(ac.createStereoPanner){const p=ac.createStereoPanner();p.pan.value=pan;g.connect(p);node=p}
+    src.connect(f); f.connect(g); node.connect(master); src.start(t,Math.random()); src.stop(t+2);
+    // crackle
+    if(Math.random()<.5){for(let i=0;i<10;i++){const tt=t+.25+Math.random()*.7;const s=ac.createBufferSource();s.buffer=noiseBuf;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=3000;const gg=ac.createGain();gg.gain.setValueAtTime(.12,tt);gg.gain.exponentialRampToValueAtTime(.0001,tt+.04);s.connect(hp);hp.connect(gg);gg.connect(master);s.start(tt,Math.random());s.stop(tt+.05)}}
+  }
+  function whistle(){
+    if(!ac||muted) return; const t=ac.currentTime; const o=ac.createOscillator(); const g=ac.createGain();
+    o.type='sine'; o.frequency.setValueAtTime(500+Math.random()*300,t); o.frequency.exponentialRampToValueAtTime(1600+Math.random()*600,t+.8);
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.035,t+.1); g.gain.exponentialRampToValueAtTime(.0001,t+.85);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t+.9);
+  }
+  function hiss(dur){
+    if(!ac||muted) return; const t=ac.currentTime; const s=ac.createBufferSource(); s.buffer=noiseBuf; s.loop=true;
+    const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=4500; bp.Q.value=.6;
+    const g=ac.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.09,t+.25); g.gain.setValueAtTime(.09,t+dur-.6); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    s.connect(bp); bp.connect(g); g.connect(master); s.start(t); s.stop(t+dur+.1);
+  }
+  function chime(){
+    if(!ac||muted) return; const t=ac.currentTime; const notes=[523.25,659.25,783.99,1046.5,1318.5];
+    notes.forEach((fq,i)=>{[1,2.76].forEach((m,j)=>{const o=ac.createOscillator();const g=ac.createGain();o.type='sine';o.frequency.value=fq*m;const st=t+i*.12;
+      g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(j?.03:.12,st+.01);g.gain.exponentialRampToValueAtTime(.0001,st+2.5);o.connect(g);g.connect(master);o.start(st);o.stop(st+2.6)})});
+  }
+  $('#mute').onclick=e=>{e.stopPropagation();muted=!muted;$('#mute').textContent=muted?'🔇':'🔊';if(master)master.gain.value=muted?0:.6};
+
+  /* ---------- FIREWORKS ---------- */
+  const cv=$('#fx'), cx=cv.getContext('2d'); let W,H,DPR;
+  function resize(){DPR=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+  resize(); addEventListener('resize',resize);
+  const PAL=[['#ffd166','#ffb703'],['#ff4d6d','#ff8fa3'],['#4cc9f0','#bde0fe'],['#80ffdb','#72efdd'],['#c77dff','#e0aaff'],['#ff9f1c','#ffe066'],['#ffffff','#ffd166']];
+  const rockets=[], parts=[];
+  function launch(x,ty){
+    x = x ?? W*(.15+Math.random()*.7); ty = ty ?? H*(.12+Math.random()*.33);
+    const pal=PAL[Math.random()*PAL.length|0];
+    rockets.push({x,y:H+10,tx:x+(Math.random()-.5)*60,ty,vy:-(Math.sqrt(2*0.12*(H-ty))),pal,trail:[]}); whistle();
+  }
+  function explode(r){
+    const type=Math.random(); const n= type<.2?140:90+Math.random()*60|0; const sp=2.2+Math.random()*2.4;
+    for(let i=0;i<n;i++){
+      let a=Math.PI*2*i/n + Math.random()*.05, s;
+      if(type<.2) s=sp*(i%2?1:.55);             // double ring
+      else if(type<.35) s=sp*Math.abs(Math.sin(a*2.5))+.6; // flower
+      else s=sp*(.35+Math.random()*.75);        // peony
+      parts.push({x:r.x,y:r.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,decay:.008+Math.random()*.01,c:Math.random()<.7?r.pal[0]:r.pal[1],tw:Math.random()<.3,sz:1.4+Math.random()*1.4});
+    }
+    // flash
+    parts.push({x:r.x,y:r.y,vx:0,vy:0,life:1,decay:.08,c:'#fff8dc',flash:true,sz:40});
+    boom(.8+Math.random()*.4,(r.x/W)*2-1);
+  }
+  /* ground crackers state */
+  const G={sparkler:false, anar:false, chakri:false, chAngle:0, fuse:null};
+  function ctr(el){const r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
+  function spark(x,y,vx,vy,c,life,decay,sz,grav){parts.push({x,y,vx,vy,life,decay,c,sz,g:grav,tw:Math.random()<.4})}
+  function groundEmit(){
+    if(G.sparkler){const t=ctr($('#tip'));
+      for(let i=0;i<4;i++){const a=Math.random()*Math.PI*2,s=Math.random()*2.6;spark(t.x,t.y,Math.cos(a)*s,Math.sin(a)*s,Math.random()<.5?'#fff8e1':'#ffd166',.7,.06+Math.random()*.05,1,.02)}}
+    if(G.anar){const t=ctr($('#anarTip'));
+      for(let i=0;i<10;i++){const a=-Math.PI/2+(Math.random()-.5)*.55,s=4+Math.random()*4.5;
+        spark(t.x,t.y,Math.cos(a)*s,Math.sin(a)*s,['#fff3b0','#ffd166','#ffb703','#ffffff'][Math.random()*4|0],1,.018+Math.random()*.015,1.3,.09)}}
+    if(G.chakri){const c=ctr($('#chakri')); G.chAngle+=.45; $('#chakriSvg').style.transform=`rotate(${G.chAngle}rad)`;
+      for(let k=0;k<2;k++){const a=G.chAngle+k*Math.PI,rad=c.r.width/2; const px=c.x+Math.cos(a)*rad, py=c.y+Math.sin(a)*rad;
+        for(let i=0;i<4;i++){const s=2+Math.random()*3; spark(px,py,-Math.sin(a)*s+(Math.random()-.5),Math.cos(a)*s+(Math.random()-.5),Math.random()<.5?'#4cc9f0':'#ffe066',.8,.04+Math.random()*.03,1.2,.06)}}}
+    if(G.fuse){const f=ctr($('#bombFuse')); for(let i=0;i<3;i++){const a=Math.random()*Math.PI*2;spark(f.r.right-2,f.r.top+1,Math.cos(a)*1.6,Math.sin(a)*1.6-1,'#ffd166',.6,.08,1,.03)}}
+  }
+
+  function tick(){
+    cx.globalCompositeOperation='destination-out'; cx.fillStyle='rgba(0,0,0,.22)'; cx.fillRect(0,0,W,H);
+    cx.globalCompositeOperation='lighter';
+    groundEmit();
+    for(let i=rockets.length-1;i>=0;i--){const r=rockets[i]; r.trail.push([r.x,r.y]); if(r.trail.length>8)r.trail.shift();
+      r.x+=(r.tx-r.x)*.02; r.y+=r.vy; r.vy+=.12;
+      cx.strokeStyle='rgba(255,210,140,.7)'; cx.lineWidth=2; cx.beginPath(); r.trail.forEach((p,j)=>j?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1])); cx.stroke();
+      if(r.vy>=-.5||r.y<=r.ty){explode(r);rockets.splice(i,1)}}
+    for(let i=parts.length-1;i>=0;i--){const p=parts[i];
+      if(p.flash){const g=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.sz*p.life*2);g.addColorStop(0,`rgba(255,248,220,${p.life*.6})`);g.addColorStop(1,'rgba(255,200,100,0)');cx.fillStyle=g;cx.beginPath();cx.arc(p.x,p.y,p.sz*2,0,7);cx.fill();}
+      else{p.vx*=.985;p.vy=p.vy*.985+(p.g??.035);p.x+=p.vx;p.y+=p.vy;
+        const a=p.tw?(Math.random()<.5?p.life:p.life*.2):p.life; cx.globalAlpha=Math.max(a,0); cx.fillStyle=p.c; cx.beginPath(); cx.arc(p.x,p.y,p.sz,0,7); cx.fill(); cx.globalAlpha=1;}
+      p.life-=p.decay; if(p.life<=0)parts.splice(i,1)}
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  /* ---------- lanterns ---------- */
+  let lanternTimer=null;
+  function lantern(){const l=document.createElement('div');l.className='lantern';const sc=.6+Math.random()*.8;l.style.left=(Math.random()*95)+'vw';l.style.width=26*sc+'px';l.style.height=36*sc+'px';
+    l.style.setProperty('--dx',((Math.random()-.5)*120)+'px');l.style.animationDuration=(14+Math.random()*10)+'s';l.style.opacity=.5+sc*.4;document.body.appendChild(l);setTimeout(()=>l.remove(),25000)}
+
+  /* ---------- SEQUENCE ---------- */
+  let autoTimer=null, opened=false;
+  function show(el,delay){setTimeout(()=>el.classList.add('in'),delay)}
+  function startShow(){
+    $('#main').classList.add('show'); startGround(); $('#mute').style.display='inline-flex';
+    show($('#hindi'),300); show($('#title'),900); show($('#msg'),1900); show($('#withLove'),3000);
+    [...document.querySelectorAll('.name')].forEach((n,i)=>show(n,3500+i*450));
+    show($('#actions'),3500+FAMILY.length*450+400);
+    // finale salvo
+    for(let i=0;i<5;i++) setTimeout(()=>launch(),i*220);
+    setTimeout(()=>{for(let i=0;i<4;i++) setTimeout(()=>launch(),i*160)},3600+FAMILY.length*450);
+    clearInterval(autoTimer); autoTimer=setInterval(()=>{ if(!document.hidden){launch(); if(Math.random()<.35) setTimeout(()=>launch(),250)} }, reduce?3500:1300);
+    for(let i=0;i<6;i++) setTimeout(lantern,i*900); clearInterval(lanternTimer); lanternTimer=setInterval(lantern,2200);
+  }
+  function openGift(){
+    if(opened) return; opened=true; initAudio(); if(ac&&ac.state==='suspended') ac.resume();
+    const g=$('#gift'); g.classList.add('shake');
+    setTimeout(()=>{g.classList.remove('shake'); g.style.animation='none'; g.classList.add('open'); chime(); boom(1.2,0);},500);
+    setTimeout(()=>{$('#intro').classList.add('gone'); startShow();},1300);
+  }
+  $('#intro').addEventListener('click',openGift);
+  $('#intro').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openGift()});
+
+  // tap sky to launch your own
+  document.addEventListener('pointerdown',e=>{ if(opened && !e.target.closest('button')){ initAudio(); launch(e.clientX, Math.min(e.clientY,H*.7)); }});
+
+  /* ---------- the kid's routine ---------- */
+  const kid=$('#kid'); let cycle=0;
+  function setKid(c){kid.classList.remove('lean','back','jump'); if(c) kid.classList.add(c)}
+  function bangBomb(){
+    G.fuse=true; hiss(1.4);
+    setTimeout(()=>{G.fuse=null; const b=ctr($('#bomb'));
+      parts.push({x:b.x,y:b.y,vx:0,vy:0,life:1,decay:.05,c:'#fff',flash:true,sz:70});
+      for(let i=0;i<70;i++){const a=-Math.random()*Math.PI,s=2+Math.random()*6;spark(b.x,b.y,Math.cos(a)*s,Math.sin(a)*s,Math.random()<.5?'#ffd166':'#ff6b1a',1,.03+Math.random()*.03,1.4,.15)}
+      boom(1.6,0); $('#bomb').style.opacity=0; document.body.animate([{transform:'translate(3px,-2px)'},{transform:'translate(-3px,2px)'},{transform:'none'}],{duration:250});
+      setKid('jump'); setTimeout(()=>setKid('back'),1400);
+      setTimeout(()=>$('#bomb').style.opacity=1,4000);
+    },1500);
+  }
+  function kidRoutine(){
+    cycle++;
+    setKid('lean');                                         // reach toward the anar
+    setTimeout(()=>{ G.anar=true; hiss(6); boom(.25,-.3); }, 900);   // fuse catches
+    setTimeout(()=>setKid('back'), 1300);                    // step back
+    setTimeout(()=>setKid('jump'), 1900);                    // celebrate!
+    setTimeout(()=>setKid('back'), 3400);
+    setTimeout(()=>{ G.anar=false; }, 7000);
+    if(cycle%2===0) setTimeout(bangBomb, 7600);
+  }
+  let kidTimer=null;
+  function startGround(){
+    $('#scene').classList.add('in'); G.sparkler=true; G.chakri=true; setKid('back');
+    setTimeout(kidRoutine,1800); clearInterval(kidTimer); kidTimer=setInterval(kidRoutine,11000);
+  }
+
+  /* ---------- SHARE ---------- */
+  const url=location.href.split('#')[0].split('?')[0];
+  const shareText='🪔 The Maddula family has sent you a Diwali gift! Tap to open — best with the sound on ✨';
+  function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+  async function copy(){try{await navigator.clipboard.writeText(shareText+'\n'+url);toast('Link copied!')}catch(e){prompt('Copy this link:',url)}}
+  $('#shareBtn').onclick=async e=>{e.stopPropagation(); if(navigator.share){try{await navigator.share({title:'Happy Diwali from the Maddula family',text:shareText,url})}catch(err){}} else copy()};
+  $('#waBtn').onclick=e=>{e.stopPropagation(); window.open('https://wa.me/?text='+encodeURIComponent(shareText+'\n'+url),'_blank')};
+  $('#copyBtn').onclick=e=>{e.stopPropagation(); copy()};
+  $('#replayBtn').onclick=e=>{e.stopPropagation();
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.remove('in'));
+    setTimeout(()=>{ show($('#hindi'),100); show($('#title'),600); show($('#msg'),1400); show($('#withLove'),2300);
+      [...document.querySelectorAll('.name')].forEach((n,i)=>show(n,2700+i*400)); show($('#actions'),2700+FAMILY.length*400+300);
+      for(let i=0;i<7;i++) setTimeout(()=>launch(),i*200); chime(); },500);
+  };
+})();
+</script>
+</body>
+</html>
