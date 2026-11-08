@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Maddula family sent you a Diwali gift 🪔</title>
+<title>The Maddula &amp; Vijayakumar families sent you a Diwali gift 🪔</title>
 <meta name="description" content="Tap to open your Diwali gift — best with the sound on.">
 <meta name="theme-color" content="#070b14">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The Maddula family sent you a Diwali gift 🪔">
+<meta property="og:title" content="The Maddula &amp; Vijayakumar families sent you a Diwali gift 🪔">
 <meta property="og:description" content="Tap to open your Diwali gift — best with the sound on.">
 <meta property="og:url" content="https://wolfsbane9513.github.io/wolfsbane9513/diwali/">
 <meta property="og:image" content="https://wolfsbane9513.github.io/wolfsbane9513/diwali/og.jpg">
@@ -201,7 +201,7 @@
 
 <!-- INTRO -->
 <div id="intro" role="button" aria-label="Open your Diwali gift" tabindex="0">
-  <p class="from-line">The <b>Maddula family</b> has sent you a Diwali gift</p>
+  <p class="from-line">The <b>Maddula &amp; Vijayakumar families</b> have sent you a Diwali gift</p>
   <div class="gift" id="gift">
     <div class="glow"></div>
     <div class="box"><div class="pattern"></div></div>
@@ -289,7 +289,7 @@
 
 <script>
 (() => {
-  const FAMILY = ["Maddula Ramakrishna","Maddula Ramadevi","Maddula Ravi Prakash","Sruthi Vijayakumar","Maddula Yash Vir"];
+  const FAMILY = ["Maddula Ramakrishna","Maddula Ramadevi","Vijayakumar","Rajeshwasri","Maddula Ravi Prakash","Sruthi Vijayakumar","Maddula Yash Vir"];
   const $ = s => document.querySelector(s);
   const rnd=(a,b)=>a+Math.random()*(b-a);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -631,10 +631,10 @@
 
   /* ===== SHARE ===== */
   const url=location.href.split('#')[0].split('?')[0];
-  const shareText='🪔 The Maddula family has sent you a Diwali gift! Tap to open — best with the sound on ✨';
+  const shareText='🪔 The Maddula & Vijayakumar families have sent you a Diwali gift! Tap to open — best with the sound on ✨';
   function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
   async function copy(){try{await navigator.clipboard.writeText(shareText+'\n'+url);toast('Link copied!')}catch(e){prompt('Copy this link:',url)}}
-  $('#shareBtn').onclick=async e=>{e.stopPropagation(); if(navigator.share){try{await navigator.share({title:'Happy Diwali from the Maddula family',text:shareText,url})}catch(err){}} else copy()};
+  $('#shareBtn').onclick=async e=>{e.stopPropagation(); if(navigator.share){try{await navigator.share({title:'Happy Diwali from the Maddula & Vijayakumar families',text:shareText,url})}catch(err){}} else copy()};
   $('#waBtn').onclick=e=>{e.stopPropagation(); window.open('https://wa.me/?text='+encodeURIComponent(shareText+'\n'+url),'_blank')};
   $('#copyBtn').onclick=e=>{e.stopPropagation(); copy()};
   $('#replayBtn').onclick=e=>{e.stopPropagation(); resetAll(); setTimeout(runStory,400)};
